@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Forms!</title>
+  </head>
+  <body>
+    <center>
+      <form >
+        <table width="1000" border="1" rules="all" cellpadding="10">
+          <tr>
+            <th><font size="+5" color="green">Web Forms!</font></th>
+          </tr>
+          <tr>
+            <td>
+                <label for="email"> Email Id: </label>
+                <input type="text" id="email" placeholder="Enter your email" autofocus maxlength="20">
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <label for="pwd">Enter Password: </label>
+                <input  id="pwd" type="password">
+            </td>
+          </tr>
+          <tr>
+            <td>
+                Ur Technical Knowledge:
+                <input type="checkbox" value="c++">C++
+                <input type="checkbox" value="dsa">dsa
+                <input type="checkbox" value="java">java
+                
+            </td>
+          </tr>
+          <tr>
+            <td>
+                Occupation: 
+                <input type="radio" name="ocuu">Job
+                <input type="radio" name="ocuu">Business
+            </td>
+          </tr>
+          <tr>
+            <td>
+                 Date of Birth: 
+                <input type="date">
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <!-- DropBox/ComboBox -->
+                Select State:
+                <select >
+                    <option value="none">Choose State</option>
+                    <option value="punjab">PUNJAB</option>
+                    <option value="himachal">Himachal</option>
+                    <option value="goa">GOA</option>
+                    <option value="haryana">HARYANA</option>
+                </select>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <!--ListBox -->
+                Select State:
+                <select size="6" multiple>
+                    <option value="none">Choose State</option>
+                    <optgroup label="Select State"> </optgroup>
+                    <option value="punjab">PUNJAB</option>
+                    <option value="himachal">Himachal</option>
+                    <option value="goa">GOA</option>
+                    <option value="haryana">HARYANA</option>
+
+                    <optgroup label="Group 2"> </optgroup>
+                    <option value="punjab">PUNJAB</option>
+                    <option value="himachal">Himachal</option>
+                    <option value="goa">GOA</option>
+                    <option value="haryana">HARYANA</option>
+                </select>
+
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+                 Comments:
+                 <textarea cols="30" rows="10"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <input type="file">
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+                <input type="range" max="10" min="5">
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <input type="number" max="5" min="1">
+            </td>
+          </tr>
+
+          <tr align="center">
+            <td>
+                <input type="button" value="Submit Form!">
+                <input type="submit"value="Plz Send To Server!">
+                <input type="reset">
+                <input type="image" src="pics/sir.jpeg" width="100" height="100">
+            </td>
+          </tr>
+        </table>
+      </form>
+    </center>
+  </body>
+</html>
