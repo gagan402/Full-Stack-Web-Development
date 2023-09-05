@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS2</title>
+    <style>
+        /* class selector*/
+        /* the order of defining class matters*/
+        .ggn{
+            width:100px;
+            text-align:center;
+            color:white;
+            background-color:rgb(205, 166, 50);
+            padding-top:10px;
+            padding-bottom:10px;
+            border:1px solid black;
+            border-radius:5px;
+            float:left;
+            margin-right:10px;
+            font-weight:900;
+            transition:ease all 1s;
+           
+        }
+        .ggn-signup{
+            background-color:blue;
+        }
+        .ggn-login{
+            background-color:yellow;
+            color:red;
+        }
+        .ggn:hover{
+            cursor:pointer;
+            background-color:burlywood;
+            /*border-radius:20px 0px 20px 0px;*/
+        }
+        .ggn:active{
+            transform:translate(5px, -5px);
+            transition:ease all 1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="ggn ggn-signup">SIGN UP</div>
+    <div class="ggn-login ggn">LOGIN</div>
+    <div class="ggn" >FORGET</div>
+</body>
+</html>
