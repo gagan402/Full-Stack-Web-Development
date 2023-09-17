@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Box  </title>
+    <style>
+        .container{
+            display:flex;
+            background-color: grey;
+            width:1100px;
+            height:400px;
+            flex-direction:row;/*row |row-reverse|column|column-reverse  */
+            justify-content:space-evenly;/*flex-start|flex-end|center|space-around|space-between|space-evenly  (horizintal adjustment)*/
+            align-items:center;/*vertical adjustment*/
+            margin:auto;
+        }
+        .item{
+            width:300px;
+            height:300px;
+            background-color: yellowgreen;
+            display:flex;
+            flex-direction:column;
+            padding:10px;
+            /* justify-content:center; */
+            /* align-items:center; */
+            
+        }
+        .pic{
+           
+             /* background-color: palevioletred; */
+             display:flex;
+             justify-content:center;
+        }
+        .imgs
+        {
+            width:200px;
+            height:100px;
+            background-image: url(/pics/banner.jpg);
+            background-size: contain;
+            
+        }
+        .gj{
+            display:flex;
+            justify-content:right;
+        }
+
+        .title
+        {
+            background-color: rgb(162, 208, 243);;
+            font-size:40px; 
+        }
+        .details{
+            background-color: rgb(237, 240, 148);;
+        }
+       
+
+        .nav-bar{
+            width:100%;
+            height:80px;
+            background-color: grey;
+            display:flex;
+            /* flex-direction:row; */
+            justify-content:center;
+        }
+        .gg{
+            border:1px solid white;
+            display:flex;
+            align-items:center;
+        }
+        .left{
+            flex-grow:1;
+            justify-content:left;
+        }
+        .cen{
+            flex-grow:5;
+            justify-content:center;
+        }
+        .right
+        {
+            flex-grow:1;
+            justify-content:right;
+        }
+        .logo
+        {
+            width:50px;
+            height:50px;
+            background-image: url(/pics/Logo.png);
+            background-size:contain;
+        }
+        .nam
+        {
+            font-size:30px;
+        }
+    </style>
+</head>
+<body>
+     <div class="container">
+        <div class="item">
+            <div class="pic">
+                <div class="imgs"></div>
+            </div>
+            <div class="gj">
+                <div class="title">Its title</div>
+            </div>
+            
+            <div class="details">Lorem ipsum, dolor sit ame
+            t consectetur adipisicing elit. Totam, magni!</div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <div class="imgs"></div>
+            </div>
+    
+            <div class="gj">
+                <div class="title">Its title</div>
+            </div>
+            <div class="details">Lorem ipsum, dolor sit ame
+            t consectetur adipisicing elit. Totam, magni!</div>
+        </div>
+        <div class="item">
+            <div class="pic">
+                <div class="imgs"></div>
+            </div>
+   
+            <div class="gj">
+                <div class="title">Its title</div>
+            </div>
+            <div class="details">Lorem ipsum, dolor sit ame
+            t consectetur adipisicing elit. Totam, magni!</div>
+        </div>
+     </div>
+
+
+     <hr><hr>
+     <div class="nav-bar">
+        <div class="gg left">
+            <div class="logo"></div>
+            <div class="nam">www.realjava.com</div>
+        </div>
+        <div class="gg cen">
+            <div class="logo"></div>
+            <div class="nam">www.realjava.com</div>
+        </div>
+        <div class="gg right">
+            <div class="logo"></div>
+            <div class="nam">www.realjava.com</div>
+        </div>
+     </div>
+</body>
+</html>
