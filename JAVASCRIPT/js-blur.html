@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluring</title>
+    <script>
+        function chkA()
+        {
+            var refa=document.querySelector("#txtA");
+            /*if(refa.value=="")
+            {
+            
+            }*/
+            if(refa.value.length==0)
+            {
+                // alert("Fill Value");
+                refa.style.backgroundColor="red";
+                document.querySelector("#errA").innerHTML="Fill Value";
+            }
+            else if(isNaN(refa.value)==true){
+                refa.style.backgroundColor="purple";
+                document.querySelector("#errA").innerHTML="Fill Number Plz";
+            }
+            else{
+                refa.style.backgroundColor="green";
+                document.querySelector("#errA").innerHTML="ok✔";
+            }
+            
+            
+           
+        }
+        function chkB()
+        {
+            var refb=document.querySelector("#txtB");
+           
+            if(refb.value.length==0)
+            {
+                refb.style.backgroundColor="red";
+                document.querySelector("#errB").innerHTML="Fill Value";
+            }
+            else if(isNaN(refb.value)==true){
+                refb.style.backgroundColor="purple";
+                document.querySelector("#errB").innerHTML="Fill Number Plz";
+            }
+            else{
+                refb.style.backgroundColor="green"; 
+                document.querySelector("#errB").innerHTML="ok✔";
+            }
+        }
+            
+            
+           
+        
+        function doSum()
+        {
+           var refa=document.getElementById("txtA");
+           var a=refa.value;
+           var refb=document.getElementById("txtB");
+           var b=refb.value;
+            
+           if(refa.style.backgroundColor=="green" && refb.style.backgroundColor=="green")
+           {
+            var sum=parseInt(a)+parseInt(b);
+            document.querySelector("#txtSum").value=sum;
+           }
+           else{
+            alert("😁");
+           }
+            
+        }
+    </script>
+</head>
+<body>
+    <center>
+    <p>
+        <form >
+            <p>Enter A : <input type="text" id="txtA" onblur="chkA();"><span id="errA">*</span> </p>
+            
+            <p>Enter B: <input type="text" id="txtB" onblur="chkB();"><span id="errB">*</span></p>
+            
+            <p><input type="button" value="SUM" onclick="doSum();"></p>
+            <P>Sum : <input type="text"  id="txtSum" disabled></P>
+        </form>
+    </p>
+</center>
+</body>
+</html>

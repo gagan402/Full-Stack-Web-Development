@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Card</title>
+    <style>
+        #main{
+            width:600px;
+            height:400px;
+            background-color:pink;
+        }
+    </style>
+    <script>
+       function chkcpp()
+       {
+          var refcpp=document.querySelector("#txtcpp");
+          if(refcpp.value.length==0)
+          {
+            document.querySelector("#errcpp").innerHTML="Plz fill data!";
+          }
+          else
+          if(isNaN(refcpp.value)==true)
+          {
+            document.querySelector("#errcpp").innerHTML="Plz fill numeric Value!";
+          }
+          else{
+            document.querySelector("#errcpp").innerHTML="💚ok";
+          }
+       }
+       function chkjava()
+       {
+          var refjava=document.querySelector("#txtjava");
+          if(refjava.value.length==0)
+          {
+            document.querySelector("#errjava").innerHTML="Plz fill data!";
+          }
+          else
+          if(isNaN(refjava.value)==true)
+          {
+            document.querySelector("#errjava").innerHTML="Plz fill numeric Value!";
+          }
+          else{
+            document.querySelector("#errjava").innerHTML="💚ok";
+          }
+       }
+       function chkdsa()
+       {
+          var refdsa=document.querySelector("#txtdsa");
+          if(refdsa.value.length==0)
+          {
+            document.querySelector("#errdsa").innerHTML="Plz fill data!";
+          }
+          else
+          if(isNaN(refdsa.value)==true)
+          {
+            document.querySelector("#errdsa").innerHTML="Plz fill numeric Value!";
+          }
+          else{
+            document.querySelector("#errdsa").innerHTML="💚ok";
+          }
+       }
+
+       function doTotal(){
+        var refcpp=document.querySelector("#txtcpp");
+        var cpp=refcpp.value;
+        var refjava=document.querySelector("#txtjava");
+        var java=refjava.value;
+        var refdsa=document.querySelector("#txtdsa");
+        var dsa=refdsa.value;
+
+        var ecpp=document.getElementById("errcpp").innerHTML;
+        var ejava=document.getElementById("errjava").innerHTML;
+        var edsa=document.getElementById("errdsa").innerHTML;
+         var t=parseInt(cpp)+parseInt(java)+parseInt(dsa);
+        if(ecpp=="💚ok" && ejava=="💚ok" && edsa=="💚ok")
+        {
+         document.getElementById("txtTM").value=t;
+         document.getElementById("btnPer").disabled=false;
+        }
+       }
+
+
+       function doPer()
+       {
+        var refcpp=document.querySelector("#txtcpp");
+        var cpp=refcpp.value;
+        var refjava=document.querySelector("#txtjava");
+        var java=refjava.value;
+        var refdsa=document.querySelector("#txtdsa");
+        var dsa=refdsa.value;
+        var t=parseInt(cpp)+parseInt(java)+parseInt(dsa);
+        var per=(t*100)/300;
+        document.getElementById("txtP").value=per+"%";
+        document.getElementById("btnResult").disabled=false;
+        
+
+       }
+
+       function doResult()
+       {
+        var refcpp=document.querySelector("#txtcpp");
+        var cpp=refcpp.value;
+        var refjava=document.querySelector("#txtjava");
+        var java=refjava.value;
+        var refdsa=document.querySelector("#txtdsa");
+        var dsa=refdsa.value;
+        var t=parseInt(cpp)+parseInt(java)+parseInt(dsa);
+        var per=(t*100)/300;
+        if(per>=45)
+        {
+            document.getElementById("txtR").value="pass";
+        }
+        else{
+            document.getElementById("txtR").value="fail";
+        
+        }
+       }
+
+       function doClear()
+       {
+        document.getElementById("txtcpp").value="";
+        document.getElementById("txtjava").value="";
+        document.getElementById("txtdsa").value="";
+        document.getElementById("txtTM").value="";
+        document.getElementById("txtP").value="";
+        document.getElementById("txtR").value="";
+        document.getElementById("btnPer").disabled=true;
+        document.getElementById("btnResult").disabled=true;
+       }
+    </script>
+</head>
+<body>
+    <center>
+        <div id="main">
+            <h3>Report Card</h3>
+            <br>
+            <p> Enter marks of C++ : <input type="text" id="txtcpp" onblur="chkcpp();"> <span id="errcpp" >*</span></p>
+            <p>Enter marks of Java : <input type="text" id="txtjava" onblur="chkjava();"><span id="errjava">*</span></p>
+            <p>Enter marks of DSA : <input type="text" id="txtdsa" onblur="chkdsa();"><span id="errdsa">*</span></p>
+            <p>
+                <input type="button" value="Total" onclick="doTotal();">
+                <input type="button" value="Percentage" onclick="doPer();" id="btnPer" disabled>
+                <input type="button" value="Result" onclick="doResult();" id="btnResult" disabled>
+                <input type="button" value="Clear" onclick="doClear();">
+            </p>
+            
+            <p>    Total Marks: <input type="text" id="txtTM"  disabled> </p>
+            <p>    Percentage: <input type="text" id="txtP" disabled> </p>
+            <p>    Result: <input type="text" id="txtR" disabled> </p>
+        </div>
+
+    </center>
+</body>
+</html>

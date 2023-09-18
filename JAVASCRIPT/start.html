@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starting JavaScript</title>
+    <script>
+        let pi=3.14;//global variable
+        function doHi()
+        {
+           // console.log("clicked");
+            // document.write("Clicked Again"); document is object and write is it's member function
+            // alert("Hello Guyzz!");
+            var x;//generic variable-no data type
+            alert(x);//value of x will be undefined
+            x=10;//x becomes integer
+            alert(x);
+            alert(typeof(x));
+
+            x="gagan";
+            alert(x);
+            alert(typeof(x));
+            
+            x=true;
+            alert(x);
+            alert(typeof(x));
+
+            let name="aman";
+            alert(name);
+
+            //x and name are local variables
+        }
+
+
+        function doPrompt()
+        {
+            var otp=prompt("Enter otp:");//it returns string always
+
+            alert(otp);//data type of otp will be always string
+            // alert(typeof(otp));
+            if(otp===786)/* auto conversion done by ==
+                            === consider data type while comparision no-auto conversion*/
+            {
+                alert("ok");
+            }
+            else{
+                alert("wrong");
+            }
+
+        }
+
+        function doConfirm()
+        {
+            var resp=confirm("R U Sure?");//it returns boolean value
+            if(resp==true)
+            {
+               alert("Payment Done!");
+            }
+            else{
+                alert("Payment not Done!")
+            }
+        }
+
+        //DOM Manipulation (Document Object Model)
+        /*function doSum()
+        {
+            var a=document.frm.txtA.value;//value of a is string
+            var b=document.frm.txtB.value;//value of b is string
+            // var sum =a+b;str+str, (it will concatenate both the strings) a=1,b=1 then sum=12;
+            if(isNaN(a)==true ||isNaN(b)==true)
+            {
+                alert("Fill Numeric value plz!");
+            }
+            else
+            {
+            var sum=parseInt(a)+parseInt(b);
+            document.frm.txtSum.value=sum;
+            }
+            
+        }*/
+
+        function doSum()
+        {
+           var a=document.getElementById("txtA").value;
+           var refb=document.getElementById("txtB");
+           var b=refb.value;
+            if(a==""|| b=="")
+            {
+                alert("Fill DATA plz!");
+            }
+            else
+            {
+                if(isNaN(a)==true ||isNaN(b)==true)
+                {
+                alert("Fill Numeric value plz!");
+                }
+                 else
+                {
+                var sum=parseInt(a)+parseInt(b);
+                document.querySelector("#txtSum").value=sum;
+                }
+            }
+            
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <input type="button" value="Click" onclick="doHi();">
+        <br>
+        <br>
+        <input type="button" value="otp app" onclick="doPrompt();">
+        <br><br>
+        <input type="button" value="paymeny app" onclick="doConfirm();">
+        <br><br>
+        <hr>
+        <!-- <p>
+            <form name="frm">
+                <p>Enter A : <input type="text" name="txtA" > </p>
+                <p>Enter B: <input type="text" name="txtB"></p>
+                <p><input type="button" value="SUM" onclick="doSum();"></p>
+                <P>Sum : <input type="text"  name="txtSum"></P>
+            </form>
+        </p> -->
+        <p>
+            <form >
+                <p>Enter A : <input type="text" id="txtA" > </p>
+                <p>Enter B: <input type="text" id="txtB"></p>
+                <p><input type="button" value="SUM" onclick="doSum();"></p>
+                <P>Sum : <input type="text"  id="txtSum" disabled></P>
+            </form>
+        </p>
+    </center>
+</body>
+</html>
