@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Box and Radio Box</title>
+    <style></style>
+    <script>
+    //     function Load(){
+    //         alert("Hello Guyzz!");
+    //     }
+    //   function showMsg(a)
+    //    {
+    //         alert(a);
+    //    }
+    
+
+
+    function doTotal(cjava,cdsa,cjs,result)
+    {
+        var ans=0;
+        var courses="";
+        if(cjava.checked==true)
+        {
+            ans=ans+parseInt(cjava.value);
+            courses=courses+"Java ,";
+        }
+        if(cdsa.checked==true)
+        {
+            ans=ans+parseInt(cdsa.value);
+            courses=courses+"Dsa ,";
+        }
+        if(cjs.checked==true)
+        {
+            ans=ans+parseInt(cjs.value);
+            courses=courses+"JavaScript ,";
+        }
+        if(courses.endsWith(","))
+        {
+            courses=courses.substring(0,courses.length-1);
+        }
+        result.innerHTML="Total Fee :"+ans+ "<br>Courses :"+courses;
+    }
+
+    function doSelect(chkJava,chkDsa,chkJs,all)
+    {
+        /*if(all.checked==true)
+        {
+        chkJava.checked=true;
+        chkDsa.checked=true; 
+        chkJs.checked=true;
+        }
+        else{
+            chkJava.checked=false;
+        chkDsa.checked=false; 
+        chkJs.checked=false;
+
+        }
+        */
+
+        chkJava.checked=all.checked;
+        chkDsa.checked=all.checked; 
+        chkJs.checked=all.checked;
+    }
+
+    function Load()
+    {
+    document.getElementById("radJob").addEventListener("click",function(){
+        if(document.getElementById("radJob").checked==true)
+        {
+            document.getElementById("ggn").innerHTML=document.getElementById("radJob").value;
+        }
+    }
+    )
+
+    document.getElementById("radBusi").addEventListener("click",function(){
+        if(document.getElementById("radBusi").checked==true)
+        {
+            document.getElementById("ggn").innerHTML=document.getElementById("radBusi").value;
+        }
+    }
+    )
+    
+    }
+    </script>
+</head>
+<body onload="Load()//;showMsg('Page Loaded!');">
+    <center>
+        <!-- checkBox -->
+        Trainings Want to Join:
+        <p>
+            <input type="checkbox" value="8500" id="chkJava">Java <br>
+            <input type="checkbox" checked value="8200" id="chkDsa">Dsa  <br>
+            <input type="checkbox" value="8500" id="chkJs">JavaScript
+        </p>
+        <p>
+            <input type="button" value="Total Fees"  onclick="doTotal(chkJava,chkDsa,chkJs,res);">
+            <input type="checkbox"  id="chkAll" onclick="doSelect(chkJava,chkDsa,chkJs,chkAll);">Select All
+            
+
+        </p>
+        <p id="res">*</p>
+        <hr><hr>
+        <!-- Radio Buttons -->
+
+        Select Occupation: <br>
+        <input type="radio" value="job" name="occu" id="radJob">Naukri
+        
+        <input type="radio" value="self employed" name="occu" id="radBusi"> Business
+        <p>
+            <span id="ggn">*</span>
+        </p>
+    </center>
+</body>
+</html>

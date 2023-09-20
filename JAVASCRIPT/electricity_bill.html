@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Bill</title>
+    <style>
+        #main{
+            width:500px;
+            height:600px;
+            background-color:rgb(248, 239, 214);
+             padding:5px;
+        }
+        h3{
+            text-decoration:double underline;
+        }
+    </style>
+    <script>
+        function doUnitBill(txtUnits,txtUnitsBill)
+        {
+           let ans=0;
+           if(txtUnits.value<100)
+           {
+            ans=txtUnits.value*2;
+           }
+           else
+           {
+            ans=txtUnits.value*5;
+           }
+
+           txtUnitsBill.value=ans;
+        }
+        function doLoadBill(txtLoad,txtLoadBill)
+        {
+            txtLoadBill.value=txtLoad.value*1000;
+        }
+
+        function hello()
+        {
+                if(document.getElementById("chkFan").checked==true)
+                {
+                    document.getElementById("txtQtyFan").disabled=false;
+                }
+                else{
+                    document.getElementById("txtQtyFan").disabled=true;
+                }
+        }
+        function hell()
+        {
+                if(document.getElementById("chkAc").checked==true)
+                {
+                    document.getElementById("txtQtyAc").removeAttribute("disabled");
+                }
+                else{
+                    document.getElementById("txtQtyAc").setAttribute("disabled",true);
+                }
+
+
+
+        }
+        function load()
+        {
+            
+            document.getElementById("FAC").addEventListener("click",function(){
+
+                if(document.getElementById("chkFan").checked==true)
+                {
+                    document.getElementById("txtFanCharges").value=document.getElementById("txtQtyFan").value*50;
+                }
+                if(document.getElementById("chkAc").checked==true)
+                {
+                    document.getElementById("txtAcCharges").value=document.getElementById("txtQtyAc").value*100;
+                }
+            })
+             
+
+
+            document.getElementById("tt").addEventListener("click" ,function()
+            {
+                document.getElementById("txtTotalBill").value=parseInt(document.getElementById("txtUnitsBill").value)+
+                        parseInt(document.getElementById("txtLoadBill").value)+
+                        parseInt(document.getElementById("txtFanCharges").value)+
+                        parseInt(document.getElementById("txtAcCharges").value);
+                
+            })
+
+
+            document.getElementById("dd").addEventListener("click",function()
+            {
+                let bill=document.getElementById("txtTotalBill").value;
+                let discount=0;
+                if(document.getElementById("radCom").checked==true)
+                {
+                    discount=(bill*20)/100;
+                }
+                if(document.getElementById("radDom").checked==true)
+                {
+                    discount=(bill*10)/100;
+                }
+                document.getElementById("txtDiscount").value=discount;
+            })
+
+
+            document.getElementById("nn").addEventListener("click",function()
+            {
+                document.getElementById("txtNetBill").value= parseInt(document.getElementById("txtTotalBill").value)-parseInt( document.getElementById("txtDiscount").value);
+            })
+        }
+    </script>
+</head>
+<body onload="load();">
+    <center>
+        <div id="main">
+            
+            <h3 >Electric Bill App</h3>
+            <p>Units Consumed : <input type="text" id="txtUnits"></p>
+            <p>Load (in KWs) : <input type="text" id="txtLoad"></p>
+            <p>Do You have: <input type="checkbox" value="fan" id="chkFan" onclick="hello();"> FAN &nbsp;How Many <input type="text" id="txtQtyFan" disabled></p>
+            <p>Do You have: <input type="checkbox" value="ac" id="chkAc" onclick="hell();"> AC&nbsp;How Many <input type="text" id="txtQtyAc" disabled></p>
+            <p>Types of Connections : <input type="radio" id="radCom" name="conn">Commercial
+                                       <input type="radio" id="radDom" name="conn">Domestic
+            </p>
+            <p>
+                <input type="button" value="Units Bill" onclick="doUnitBill(txtUnits,txtUnitsBill);">
+                <input type="button" value="Load Bill" onclick="doLoadBill(txtLoad,txtLoadBill);">
+                <input type="button" value="Fan & AC Charges" id="FAC">
+                <input type="button" value="Total Bill" id="tt">
+                <input type="button" value="Discount" id="dd">
+                <input type="button" value="Net Bill" id="nn">
+
+            </p>
+            <p>  Units Bill : <input type="text" id="txtUnitsBill" disabled></p>
+            <p>  Load Bill  : <input type="text" id="txtLoadBill" disabled></p>
+            <p>  Fan Charges : <input type="text" id="txtFanCharges" disabled></p>
+            <p>  AC Charges : <input type="text" id="txtAcCharges" disabled></p>
+            <p>  Total Bill : <input type="text" id="txtTotalBill" disabled></p>
+            <p>  Discount : <input type="text" id="txtDiscount" disabled></p>
+            <p>  Net Bill : <input type="text" id="txtNetBill"disabled></p>
+        </div>
+    </center>
+</body>
+</html>
