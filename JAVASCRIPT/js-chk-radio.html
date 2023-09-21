@@ -82,9 +82,20 @@
     )
     
     }
+
+    function doEval(refgj)
+    {
+            var exp=refgj.value;
+            alert(exp);
+            var res=eval(exp);
+            refgj.value=res;
+    }
     </script>
 </head>
 <body onload="Load()//;showMsg('Page Loaded!');">
+    <input type="text" placeholder="Enter Expression" id="txtgj" onblur="doEval(this);">
+    <hr>
+    <hr>
     <center>
         <!-- checkBox -->
         Trainings Want to Join:

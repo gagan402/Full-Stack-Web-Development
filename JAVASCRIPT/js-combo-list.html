@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>combo-list</title>
+    <script>
+        function doShowSelected(refC,refR)
+        {
+            var selIndex=refC.selectedIndex;
+            var selTech=refC.value;
+            refR.innerHTML=selIndex+"❤"+selTech;
+
+        }
+
+
+        function doShow(refL,refR)
+        {
+            var ans="";
+            for(var i=0;i<refL.length;i++)
+            {
+                if(refL[i].selected==true)
+                {
+                ans=ans+refL[i].text+" "+refL[i].value+ " ,";
+                }
+            }
+            if(ans.endsWith(","))
+            {
+                ans=ans.substring(0,ans.length-1);
+            }
+            refR.innerHTML=ans;
+        }
+
+        function doDelete(ref)
+        {
+            if(confirm("R U Sure?"))
+            {
+            var index=ref.selectedIndex;
+            ref.remove(index);
+            }
+        }
+        function doDeleteAll(ref)
+        {
+            // ref.length=0;
+            ref.innerHTML="";
+        }
+
+        function doAdd(ref)
+        {
+            var opt=document.createElement("option");
+            var A=prompt("Enter option :");
+            opt.value=A;
+            opt.text=A;
+            ref.append(opt);
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <h3>Combo-Box</h3>
+        <p>Select Technology U know :(combobox/dropdown)
+            <p>
+                <!-- listbox is an array of strings -->
+                <select id="comboTech" onchange="doShowSelected(this,resCombo)">
+                    <option value="none">Select</option>
+                    <option value="java SELECTED">JAVA</option>
+                    <option value="stack SELECTED">FULL STACK</option>
+                    <option value="web SELECTED">WEB DEVELOPMENT</option>
+                    <option value="dsa SELECTED">DSA</option>
+                </select>
+            </p>
+            <p>
+                <span id="resCombo">*</span>
+            </p>
+        </p>
+        
+
+        <h3>List-Box</h3>
+
+        <p>Select Technologies U know :(listbox)
+            <p>
+                <!-- listbox is an array of strings -->
+                <select id="listTech" size="5" ondblclick="doDelete(listTech);" multiple>
+                   
+                    <option value="java ">JAVA</option>
+                    <option value="stack ">FULL STACK</option>
+                    <option selected value="web ">WEB DEVELOPMENT</option>
+                    <option value="dsa ">DSA</option>
+                </select>
+            </p>
+           
+            <p>
+                <input type="button" value="Show Selected " onclick="doShow(listTech,resList);">
+                <input type="button" value="Delete All " onclick="doDeleteAll(listTech);">
+                <input type="button" value="Add Item " onclick="doAdd(listTech);">
+            </p>
+            <p>
+                <span id="resList">*</span>
+            </p>
+        </p>
+    </center>
+</body>
+</html>
