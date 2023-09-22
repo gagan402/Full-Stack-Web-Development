@@ -46,45 +46,84 @@
             width:350px;
             margin-top:3px;
             border-radius:6px;
+            color:rgb(4, 4, 84);
+            font-size:30px;
+            font-weight:700;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
     </style>
+    <script>
+    
+        let str="";
+        function addEx(ref)
+        {
+            str=str+ref.value;
+            // alert(str);
+            document.getElementById("textBox").value=str;
+        }
+        function eql()
+        {
+            var res=eval(str);
+            // alert(res);
+            document.getElementById("textBox").value=res;
+
+        }
+        function ers()
+        {
+            str=str.substring(0,str.length-1);
+            document.getElementById("textBox").value=str;
+            // alert(str);
+        }
+        
+        function cleared(refText)
+        {
+            refText.value="";
+            str="";
+            // alert(str);
+
+        }
+        function sound(){
+            var snd = new Audio('/clickSound.wav')//wav is also supported
+            snd.play()//plays the sound
+        }
+    </script>
 </head>
-<body>
+<body >
     <center><h1>Calculator</h1></center>
     <div class="cal">
         <div class="rows">
-            <input type="text" >
-            <input type="button" value="Clear">
+            <input type="text"  id="textBox">
+            <input type="button" value="Clear" id="clr" onclick="cleared(textBox);sound();">
         </div>
         <div class="rows">
-            <input type="button" value="1">
-            <input type="button" value="2">
-            <input type="button" value="3">
-            <input type="button" value="+">
+            <input type="button" value="1" id="n1" onclick="addEx(this);sound();">
+            <input type="button" value="2" id="n2" onclick="addEx(this);sound();">
+            <input type="button" value="3" id="n3" onclick="addEx(this);sound();">
+            <input type="button" value="+" id="n+" onclick="addEx(this);sound();">
         </div>
         <div class="rows">
-            <input type="button" value="4">
-            <input type="button" value="5">
-            <input type="button" value="6">
-            <input type="button" value="-">
+            <input type="button" value="4"id="n4" onclick="addEx(this);sound();">
+            <input type="button" value="5" id="n5"onclick="addEx(this);sound();">
+            <input type="button" value="6" id="n6"onclick="addEx(this);sound();">
+            <input type="button" value="-" id="n-" onclick="addEx(this);sound();">
         </div>
         <div class="rows">
-            <input type="button" value="7">
-            <input type="button" value="8">
-            <input type="button" value="9">
-            <input type="button" value="*">
+            <input type="button" value="7" id="n7" onclick="addEx(this);sound();">
+            <input type="button" value="8" id="n8" onclick="addEx(this);sound();">
+            <input type="button" value="9" id="n9" onclick="addEx(this);sound();">
+            <input type="button" value="*" id="n*" onclick="addEx(this);sound();">
         </div>
         <div class="rows">
-            <input type="button" value="(">
-            <input type="button" value="0">
-            <input type="button" value=")">
-            <input type="button" value="/">
+            <input type="button" value="(" id="n(" onclick="addEx(this);sound();">
+            <input type="button" value="0" id="n0" onclick="addEx(this);sound();">
+            <input type="button" value=")" id="n)" onclick="addEx(this);sound();">
+            <input type="button" value="/" id="n/" onclick="addEx(this);sound();">
         </div>
         <div class="rows">
-            <input type="button" value="=">
-            <input type="button" value="<--">
-            <input type="button" value=".">
-            <input type="button" value="%">
+            <input type="button" value="=" id="n=" onclick="eql();sound();">
+            <input type="button" value="&lt;--" id="ng" onclick="ers();sound();">
+            <input type="button" value="." id="n." onclick="addEx(this);sound();">
+            <input type="button" value="%" id="n%"onclick="addEx(this);sound();">
         </div>
     </div>
 </body>
