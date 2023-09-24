@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping-Card</title>
+    <style>
+        #main{
+                margin-top:100px;
+                width:600px;
+                height:400px;
+                background-color:rgb(247, 181, 224);
+
+        }
+    </style>
+    <script>
+        function fillLists(refCombo)
+        {
+            var sel=refCombo.value;
+
+            if(sel=="book")
+            {
+                document.getElementById("listTypes").innerHTML="";
+                document.getElementById("PricesTypes").innerHTML="";
+
+               var a=document.createElement("option");
+               a.value="real java";
+               a.text="Real Java";
+               document.getElementById("listTypes").append(a);
+               var pa=document.createElement("option");
+               pa.value="450";
+               pa.text="450";
+               document.getElementById("PricesTypes").append(pa);
+               
+
+               var b= document.createElement("option");
+               b.value="real c";
+               b.text="Real C";
+               document.getElementById("listTypes").append(b);
+               var pb= document.createElement("option");
+               pb.value="300";
+               pb.text="300";
+               document.getElementById("PricesTypes").append(pb);
+
+
+               var c= document.createElement("option");
+               c.value="let c";
+               c.text="Let Us C";
+               document.getElementById("listTypes").append(c);
+               var pc= document.createElement("option");
+               pc.value="250";
+               pc.text="250";
+               document.getElementById("PricesTypes").append(pc);
+
+
+
+               var d= document.createElement("option");
+               d.value="web";
+               d.text="Web Dev";
+               document.getElementById("listTypes").append(d);
+               var pd= document.createElement("option");
+               pd.value="600";
+               pd.text="600";
+               document.getElementById("PricesTypes").append(pd);
+
+
+               var e= document.createElement("option");
+               e.value="mern";
+               e.text="MERN STACK";
+               document.getElementById("listTypes").append(e);
+               var ed= document.createElement("option");
+               ed.value="500";
+               ed.text="500";
+               document.getElementById("PricesTypes").append(ed);
+
+
+            }
+            if(sel=="laptop")
+            {
+                document.getElementById("listTypes").innerHTML="";
+                document.getElementById("PricesTypes").innerHTML="";
+
+                var a=document.createElement("option");
+               a.value="l1";
+               a.text="L1";
+               document.getElementById("listTypes").append(a);
+               var pa=document.createElement("option");
+               pa.value="100000";
+               pa.text="100000";
+               document.getElementById("PricesTypes").append(pa);
+               
+
+               var b= document.createElement("option");
+               b.value="l2";
+               b.text="L2";
+               document.getElementById("listTypes").append(b);
+               var pb= document.createElement("option");
+               pb.value="200000";
+               pb.text="200000";
+               document.getElementById("PricesTypes").append(pb);
+
+
+               var c= document.createElement("option");
+               c.value="l3";
+               c.text="L3";
+               document.getElementById("listTypes").append(c);
+               var pc= document.createElement("option");
+               pc.value="300000";
+               pc.text="300000";
+               document.getElementById("PricesTypes").append(pc);
+
+
+
+               var d= document.createElement("option");
+               d.value="l4";
+               d.text="L4";
+               document.getElementById("listTypes").append(d);
+               var pd= document.createElement("option");
+               pd.value="400000";
+               pd.text="400000";
+               document.getElementById("PricesTypes").append(pd);
+
+
+               var e= document.createElement("option");
+               e.value="l5";
+               e.text="L5";
+               document.getElementById("listTypes").append(e);
+               var ed= document.createElement("option");
+               ed.value="500000";
+               ed.text="500000";
+               document.getElementById("PricesTypes").append(ed);
+
+
+            }
+            else
+            if(sel=="none")
+            {
+                document.getElementById("listTypes").innerHTML="";
+                document.getElementById("PricesTypes").innerHTML="";
+            }
+            
+
+            
+
+        }
+
+
+        function selecting(ref)
+        {
+            for(var i=0;i<ref.length;i++)
+            {
+                if(ref[i].selected==true)
+                {
+                     document.getElementById("PricesTypes")[i].selected=true;
+
+                     var opt=document.createElement("option");
+                     opt.value=document.getElementById("listTypes")[i].value;
+                     opt.text=document.getElementById("listTypes")[i].text;
+                     document.getElementById("listCart").append(opt);
+
+                     var opt1=document.createElement("option");
+                     opt1.value=document.getElementById("PricesTypes")[i].value;
+                     opt1.text=document.getElementById("PricesTypes")[i].text;
+                     document.getElementById("PricesCart").append(opt1);
+                }
+                else{
+                    document.getElementById("PricesTypes")[i].selected=false;
+
+                    // var val=document.getElementById("listTypes")[i].value;
+                    // document.getElementById("listCart").remove("[value="+val+"]");
+
+                    // var val2=document.getElementById("PricesTypes")[i].value;
+                    // document.getElementById("PricesCart").remove("[value="+val2+"]");
+
+                }
+            }
+        }
+         
+        function deleteItem(ref)
+        {
+            var index=ref.selectedIndex;
+           ref.remove(index);
+           document.getElementById("PricesCart").remove(index);
+        }
+        
+        function doBill(ref)
+        {
+            var ans=0;
+            for(var i=0;i<ref.length;i++)
+            {
+                ans=ans+parseInt(ref[i].text);
+            }
+            document.getElementById("txtBill").value=ans;
+        }
+    </script>
+</head>
+<body>
+<center>
+    <div id="main">
+        <h3 style="color: rgb(8, 8, 66);">Shopping Cart</h3>
+        <hr>
+        <p>
+            <strong>Category of Item:</strong> 
+            <select id="combobox"  onchange="fillLists(this);">
+                <option value="none" >Select</option>
+                <option value="book">Books</option>
+                <option value="laptop">Laptops</option>
+            </select>
+        </p>
+        <hr>
+        <p>
+            
+                <strong>Types:</strong>
+                <select  id="listTypes" onclick="selecting(this);"  multiple></select>
+                
+
+                <strong>Prices In Rs.:</strong>
+                <select  id="PricesTypes" multiple ></select>
+            
+        </p>
+        <hr>
+        <p>
+            <strong>Cart:</strong>
+            <select  id="listCart" multiple  ondblclick="deleteItem(this);"></select>
+
+            <strong>Value of Selected Item:</strong>
+            <select  id="PricesCart" multiple></select>
+        </p>
+        <hr>
+        <p>
+            <input type="button" value="BILL" id="btn" onclick="doBill(PricesCart);">
+        </p>
+        <p>
+            <input type="text" id="txtBill">
+        </p>
+        <hr>
+
+    </div>
+</center>
+</body>
+</html>
