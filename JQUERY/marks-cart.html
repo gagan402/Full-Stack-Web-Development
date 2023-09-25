@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marks-Card</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <style>
+        #main{
+            width:600px;
+            height:400px;
+            background-color:pink;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $("#txtcpp").blur(function(){
+               var a= $("#txtcpp").val();
+               if(a=="")
+               {
+                $("#errcpp").html("Plz fill data!");
+               }
+               else
+               if(isNaN(a)==true)
+               {
+                $("#errcpp").html("Plz fill numbers only !");
+               }
+               else{
+                $("#errcpp").html("ok!🤣");
+               }
+            });
+            
+
+
+            $("#txtjava").blur(function(){
+                var a=$("#txtjava").val();
+                if(a=="")
+                {
+                    $("#errjava").html("Plz fill data!");
+                }
+                else
+                if(isNaN(a)==true)
+                 {
+                    $("#errjava").html("Plz fill numbers only !");
+                 }
+                 else{
+                  $("#errjava").html("ok!🤣");
+                 }
+            });
+
+            
+            $("#txtdsa").blur(function(){
+                var a=$("#txtdsa").val();
+                if(a=="")
+                {
+                    $("#errdsa").html("Plz fill data!");
+                }
+                else
+                if(isNaN(a)==true)
+                 {
+                    $("#errdsa").html("Plz fill numbers only !");
+                 }
+                 else{
+                  $("#errdsa").html("ok!🤣");
+                 }
+            });
+
+
+
+            $("#btntotal").click(function(){
+                if($("#errcpp").html()=="ok!🤣"   && $("#errjava").html()=="ok!🤣" && $("#errdsa").html()=="ok!🤣")
+                {
+                        var total=parseInt($("#txtcpp").val())+parseInt($("#txtjava").val())+parseInt($("#txtdsa").val());
+                        $("#txtTM").val(total);
+
+                        $("#btnPer").prop("disabled",false);
+
+                }
+                else
+                {
+                    alert("Fill details properly!");
+                
+                }
+            });
+
+            
+            $("#btnPer").click(function(){
+                var a=$("#txtTM").val();
+                var per=(a*100)/300;
+                $("#txtP").val(per+"%");
+                $("#btnResult").prop("disabled",false);
+
+            });
+
+            $("#btnResult").click(function(){
+                var a=$("#txtTM").val();
+                var per=(a*100)/300;
+                if(per>=40)
+                {
+                    $("#txtR").val("pass");
+                }
+                else{
+                    $("#txtR").val("fail");
+                }
+            });
+
+            $("#btnClear").click(function(){
+                $("#txtcpp").val("");
+                $("#txtjava").val("");
+                $("#txtdsa").val("");
+                $("#errcpp").html("*");
+                $("#errjava").html("*");
+                $("#errdsa").html("*");
+                $("#txtTM").val("");
+                $("#txtP").val("");
+                $("#txtR").val("");
+                $("#btnPer").prop("disabled",true);
+                $("#btnResult").prop("disabled",true);
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <center>
+        <div id="main">
+            <h3>Report Card</h3>
+            <br>
+            <p> Enter marks of C++ : <input type="text" id="txtcpp" > <span id="errcpp" >*</span></p>
+            <p>Enter marks of Java : <input type="text" id="txtjava"><span id="errjava">*</span></p>
+            <p>Enter marks of DSA : <input type="text" id="txtdsa"><span id="errdsa">*</span></p>
+            <p>
+                <input type="button" value="Total" id="btntotal">
+                <input type="button" value="Percentage" id="btnPer" disabled>
+                <input type="button" value="Result" id="btnResult" disabled>
+                <input type="button" value="Clear" id="btnClear" >
+            </p>
+            
+            <p>    Total Marks: <input type="text" id="txtTM"  disabled> </p>
+            <p>    Percentage: <input type="text" id="txtP" disabled> </p>
+            <p>    Result: <input type="text" id="txtR" disabled> </p>
+        </div>
+
+    </center>
+</body>
+</html>
