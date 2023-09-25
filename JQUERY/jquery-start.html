@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery- Start</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        //anonymous function:nameless function
+        //ready(): it is in-built function that loads whole page and then execute rest of code
+        $(document).ready(function(){
+            $("#btn1").click(function(){
+               var name=$("#txtName").val();
+               $(".showName").val("Hello "+name);
+            //    $("#btn2").prop("disabled",false);
+                $("#btn2").removeAttr("disabled");
+            });
+
+            $("#btn2").dblclick(function(){
+                $("#btn2").attr("disabled",true);
+            });
+
+
+            //------------------------
+
+            $("#txtName").keyup(function(){
+
+                $("#txtCpy").val($("#txtName").val());
+            });
+            
+        });
+    </script>
+</head>
+<body>
+    <center>
+        <input type="text" id="txtName">
+        <input type="button" value="Click" id="btn1">
+        <input type="button" value="😁" id="btn2" disabled>
+        <input type="text" class="showName">
+        <br>
+        <br>
+        <input type="text" id="txtCpy" placeholder="copied text">
+        
+    </center>
+</body>
+</html>

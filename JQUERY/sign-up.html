@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="signPage.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" ></script>
+
+   <script>
+   $(document).ready(function(){
+
+    $("#showSign").click(function(){
+            $("#win").toggle(1000);
+            // $("#win").fadeIn(1000);
+            // $("#win").slideDown(1000);
+         
+
+        }); 
+    $("#show").click(function(){
+        $("#win").slideToggle(1000);
+        //change text of button on button click (show/hide)
+        if( $("#show").attr("value")=="SHOW" )
+        {
+            $("#show").val("HIDE");
+        }
+        else
+        {
+            $("#show").val("SHOW");
+        }
+    }
+    );
+
+    //--------------------
+
+    $("#cross").click(function(){
+        // $("#win").hide(1000);
+        // $("#win").fadeOut(1000);
+        $("#win").fadeOut(200);
+    });
+    
+    $(".hi").mousedown(function(){
+            $(".hi").removeClass("fa-eye").addClass("fa-eye-slash");
+            $("#txtPassword").prop("type","text");
+    });
+
+    $(".hi").mouseup(function(){
+        $(".hi").removeClass("fa-eye-slash").addClass("fa-eye");
+            $("#txtPassword").prop("type","password");
+    });
+
+    
+
+   });
+</script>
+</head>
+<body>
+    <center>
+        <input type="button" value="Sign Up" id="showSign">
+        <input type="button" value="SHOW" id="show">
+    </center>
+    <div id="win">
+        <div id="cross"></div>
+        <div id="user">
+
+        </div>
+        <div id="email" class="ggn">
+            <label >Email Id:   </label><br>
+            <input type="text">
+            &nbsp;
+            <i class="fa-solid fa-envelope  fa-lg   "></i>
+           
+        </div>
+        <div id="password" class="ggn txtPss">
+            <label >Password:</label> <br>
+            <input type="password" id="txtPassword">
+            &nbsp;
+            <i class="fa-solid fa-eye  fa-sm  hi"></i>
+            
+        </div>
+        <div id="mobile" class="ggn">
+            <label > Mobile No.: </label> <br>
+            <input type="text">
+            &nbsp;&nbsp; 
+            <i class="fa-solid fa-mobile-retro  fa-lg"></i>
+        </div>
+
+    </div>
+</body>
+</html>
