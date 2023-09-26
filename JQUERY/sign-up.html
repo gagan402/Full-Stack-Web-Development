@@ -21,14 +21,24 @@
     $("#show").click(function(){
         $("#win").slideToggle(1000);
         //change text of button on button click (show/hide)
-        if( $("#show").attr("value")=="SHOW" )
+        
+        if($("#show").prop("value")=="SHOW")
         {
-            $("#show").val("HIDE");
+            $("#show").prop("value","HIDE");
         }
         else
         {
-            $("#show").val("SHOW");
+            $("#show").prop("value","SHOW");
         }
+        
+        // if( $("#show").attr("value")=="SHOW" )
+        // {
+        //     $("#show").val("HIDE");
+        // }
+        // else
+        // {
+        //     $("#show").val("SHOW");
+        // }
     }
     );
 
@@ -52,6 +62,47 @@
 
     
 
+    //email validation
+    $("#txtEmail").blur(function(){
+        var r=/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+        var email=$("#txtEmail").val();
+        if(r.test(email)==true)
+        {
+            $("#errEmail").html("Valid ✅").removeClass("not_ok").addClass("ok");
+        }
+        else{
+            
+            $("#errEmail").html("InValid ❌").removeClass("ok").addClass("not_ok");
+        }
+    });
+    
+
+    //password validation
+    $("#txtPassword").blur(function(){
+        var r=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        var pass=$("#txtPassword").val();
+        if(r.test(pass)==true)
+        {
+            $("#errPassword").html("ok").css({'color':'green','font-size':'30px'});
+        }
+        else{
+            $("#errPassword").html(" password must be of 6 to 20 characters which contain at least one numeric digit,  one uppercase and one lowercase letter").css({'font-size':'15px','color':'red'});
+        }
+    });
+
+    //mobile validation
+    $("#txtMobile").blur(function(){
+        var r= /^\d{10}$/;
+        var mob=$("#txtMobile").val();
+        if(r.test(mob)==true)
+        {
+            $("#errMobile").html("ok").css({'color':'green','font-size':'30px'});
+        }
+        else{
+            $("#errMobile").html("Invalid Mobile Number").css({'font-size':'20px','color':'red'});
+        }
+    });
+
    });
 </script>
 </head>
@@ -66,22 +117,24 @@
 
         </div>
         <div id="email" class="ggn">
-            <label >Email Id:   </label><br>
-            <input type="text">
+            <label >Email Id:   </label><span  id="errEmail">*</span>
+            <br>
+            <input type="text" id="txtEmail">
             &nbsp;
             <i class="fa-solid fa-envelope  fa-lg   "></i>
            
         </div>
         <div id="password" class="ggn txtPss">
-            <label >Password:</label> <br>
+            <label >Password:</label>
+            <span id="errPassword">*</span> <br>
             <input type="password" id="txtPassword">
             &nbsp;
             <i class="fa-solid fa-eye  fa-sm  hi"></i>
             
         </div>
         <div id="mobile" class="ggn">
-            <label > Mobile No.: </label> <br>
-            <input type="text">
+            <label > Mobile No.: </label><span id="errMobile">*</span> <br>
+            <input type="text" id="txtMobile">
             &nbsp;&nbsp; 
             <i class="fa-solid fa-mobile-retro  fa-lg"></i>
         </div>

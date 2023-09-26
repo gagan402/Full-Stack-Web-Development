@@ -56,3 +56,9 @@ input[type="password"]{
     color:rgb(4, 4, 132);
     font-size:20px;
 }
+.ok{
+    color:green;
+}
+.not_ok{
+    color:red;
+}
