@@ -12,6 +12,7 @@ app.use(express.static("public"));//static:it will work for .css and .js files
  
 
 
+
 //URL handlers
 //req,res are objects and formal arguments sent by node js server
 app.get("/",function(req,res){
