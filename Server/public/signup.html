@@ -4,16 +4,78 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+  <script> 
+  //display preview of image
+    function doPrev(refFile,prevImg)
+    {
+      const [file]=refFile.files;//an array-like property that contains the selected files.The code extracts the first file (if any) and assigns it to the file variable.
+      if(file)
+      {
+        prevImg.src=URL.createObjectURL(file);//the URL.createObjectURL method is used to create a URL for the selected file, which can be used as the source (src) for an HTML image element (prevImg)
+      }
+    }
+  </script>
   </head>
   <body>
     <h3>Sign up here</h3>
    
-    <form action="/signup-pro" type="get">
+    <form action="/signup-pro" method="get">
         Email Id:<input type="text" name="txtEmail" value="gagandeepg973@gmail.com">
         <br>
         Password: <input type="password" name="txtPass" value="123">
         <br>
+        <p>
+          plan :<input type="radio" name="plan" value="Gold">GOLD 
+          <input type="radio" name="plan" value="Silver">SILVER
+
+        </p>
+
+        <p>
+          City:<select name="ComboCity">
+                    <option value="none">Select</option>
+                    <option value="bathinda">Bathinda</option>
+                    <option value="Patiala">Patiala</option>
+                    <option value="Chd">Chd</option>
+
+          </select>
+        </p>
+        <br>
+        <p>
+          City Visted :<select name="listV" size="2" multiple>
+                    
+                    <option value="bathinda">Bathinda</option>
+                    <option value="Patiala">Patiala</option>
+                    <option value="Chd">Chd</option>
+
+          </select>
+        </p>
+        <br>
+        <p>
+          Qualification: <input type="checkbox" name="bt" value="B.tech">B.tech 
+          <input type="checkbox" name="mb" value="mba"> MBA
+        </p>
+        <br>
         <input type="submit" value="SIGNUP NOW">
+    </form>
+
+    <br>
+    <br><br>
+    <hr>
+    <!-- ///////////////////////////////////// -->
+      <h2>Send data safely</h2>
+      <form action="/signup-pro-safe" method="post">
+        Email Id:<input type="text" name="txtEmail" value="gagandeepg973@gmail.com">
+        <br>
+        Password: <input type="password" name="txtPass" value="123">
+        <br>
+           Upload pic :<input type="file" name="ppic" onchange="doPrev(this,prev);"> 
+           <p>
+            <img src="" id="prev" width="200" height="200"> 
+           </p>
+
+        <br>
+        <input type="submit" value="SIGNUP safe">
+       
     </form>
   </body>
 </html>

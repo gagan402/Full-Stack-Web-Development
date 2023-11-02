@@ -10,7 +10,7 @@ app.listen(8081,function(){
 
 app.use(express.static("public"));//static:it will work for .css and .js files
  
-
+app.use(express.urlencoded(true));//to concert post data to JSON object
 
 
 //URL handlers
@@ -43,12 +43,36 @@ app.get("/login",function(req,res){
 })
 
 
-//browser will send data to server through query string(present in url)
+//browser will send data to server through query string(present in url) (2048 character limit)
 //JSON:Java Script Object Notation
 //data sent by browser will be recevied by node js and will be converted into json object
+//through get only text data is allowed to send
 app.get("/signup-pro",function(req,res){
 
         // res.send(req.query);//query is an inner object of request object
-         res.send(req.query.txtEmail) ;                 
+       
+         res.send(req.query) ;  
+         var qua="";
+        if(req.query.bt!=undefined)
+        {
+          qua=qua+req.query.bt+",";
+        }
         
+        if(req.query.mb!=undefined)
+        {
+            qua=qua+req.query.mb+",";
+        }
+        if(qua=="")
+        {
+            console.log("no");   
+        }
+        else
+        {
+         console.log(qua.substring(0,qua.length-1));              
+        }
+});
+//post send data to server in binary form
+app.post("/signup-pro-safe",function(req,res){
+    console.log(req.body);
+    res.send(req.body);
 });
