@@ -1,6 +1,7 @@
 var express=require("express");
+var fileupload=require("express-fileupload");
 var app=express();
-
+const path=require("path");
 
                 //call back function
 app.listen(8081,function(){
@@ -11,7 +12,7 @@ app.listen(8081,function(){
 app.use(express.static("public"));//static:it will work for .css and .js files
  
 app.use(express.urlencoded(true));//to concert post data to JSON object
-
+app.use(fileupload());
 
 //URL handlers
 //req,res are objects and formal arguments sent by node js server
@@ -75,4 +76,14 @@ app.get("/signup-pro",function(req,res){
 app.post("/signup-pro-safe",function(req,res){
     console.log(req.body);
     res.send(req.body);
+    // file uploading
+    //when method is post in case of files a new files object will be created for files being uploaded by user
+    var filename=req.body.txtEmail+"-"+req.files.ppic.name;
+    console.log(filename);
+
+        var filepath=path.join(__dirname,"public","uploads",filename);//".."-> come out of directory
+        console.log(filepath);
+        req.files.ppic.mv(filepath);
+
 });
+
