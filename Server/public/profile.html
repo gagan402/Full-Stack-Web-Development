@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script> 
+        //display preview of image
+          function doPrev(refFile,prevImg)
+          {
+            const [file]=refFile.files;//an array-like property that contains the selected files.The code extracts the first file (if any) and assigns it to the file variable.
+            if(file)
+            {
+              prevImg.src=URL.createObjectURL(file);//the URL.createObjectURL method is used to create a URL for the selected file, which can be used as the source (src) for an HTML image element (prevImg)
+            }
+          }
+        </script>
+</head>
+<body>
+   
+    <!-- ///////////////////////////////////// -->
+    <!--enctype="multipart/form-data"==== attribute is typically used when you want to upload files, such as images or documents, through a form. -->
+      <h2>Profile Page</h2>
+      <form  method="post" enctype="multipart/form-data">
+        Email Id:<input type="text" name="txtEmail" value="gagandeepg973@gmail.com">
+        <br>
+        Name:  <input type="text" name="txtName" value="gagan">
+        <br>
+           Upload pic :<input type="file" name="ppic" onchange="doPrev(this,prev);"> 
+           <p>
+            <img src="" id="prev" width="200" height="200"> 
+           </p>
+
+        <br>
+        Date of Birth:<input type="date" name="dob">
+
+        <br>
+
+        <input type="submit" value="Save data" formaction="/signing">
+        <input type="submit" value="Delete" formaction="/do-delete">
+        <input type="submit" value="Update" formaction="/do-update">
+        <input type="submit" value="Show All" formaction="/do-show">
+       
+    </form>
+</body>
+</html>
