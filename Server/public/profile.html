@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script> 
         //display preview of image
           function doPrev(refFile,prevImg)
@@ -14,7 +16,29 @@
               prevImg.src=URL.createObjectURL(file);//the URL.createObjectURL method is used to create a URL for the selected file, which can be used as the source (src) for an HTML image element (prevImg)
             }
           }
-        </script>
+
+
+
+          $(document).ready(function(){
+               $("#ggn").blur(function(){
+                     var emailid=$("#ggn").val();
+                     var obj={
+                      type:"get",
+                      url:"/chk-email",
+                      data:{
+                        email:emailid
+                      }
+
+                     }
+
+                     $.ajax(obj).done(function(res){
+                            $("#gj").html(res);
+                     }).fail(function(err){
+                            alert(err);
+                     })
+               });
+          });
+    </script>
 </head>
 <body>
    
@@ -22,7 +46,7 @@
     <!--enctype="multipart/form-data"==== attribute is typically used when you want to upload files, such as images or documents, through a form. -->
       <h2>Profile Page</h2>
       <form  method="post" enctype="multipart/form-data">
-        Email Id:<input type="text" name="txtEmail" value="gagandeepg973@gmail.com">
+        Email Id:<input type="text" name="txtEmail" value="gagandeepg973@gmail.com"  id="ggn"><span id="gj">*</span>
         <br>
         Name:  <input type="text" name="txtName" value="gagan">
         <br>

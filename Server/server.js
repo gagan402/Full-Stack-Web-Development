@@ -101,8 +101,10 @@ const config={
     host:"localhost",
     user:"root",
     password:"123Sarpanch@#$",
-    database:"webdev"
+    database:"webdev",
+    dateStrings:true
 }
+// When dateStrings is set to true, it typically means that the MySQL driver for Node.js will treat date values as strings instead of converting them to JavaScript Date objects
 var mysqldb=mysql2.createConnection(config);
 mysqldb.connect(function(err){
     if(err==null)
@@ -117,12 +119,15 @@ mysqldb.connect(function(err){
 
 
 app.post("/signing",function(req,res){
-    
-    var filename=req.body.txtEmail+"-"+req.files.ppic.name;
+    var filename="nopic.jpg";
+
+    if(req.body.files!=null)
+    {
+    filename=req.body.txtEmail+"-"+req.files.ppic.name;
     var filepath=path.join(__dirname,"public","uploads",filename);//".."-> come out of directory
     // console.log(filepath);
     req.files.ppic.mv(filepath);
-
+    }
     var Email=req.body.txtEmail;
     var Name=req.body.txtName;
     var birth=req.body.dob;
@@ -161,12 +166,14 @@ app.post("/do-delete",function(req,res){
 });
 
 app.post("/do-update",function(req,res){
-    
-    var filename=req.body.txtEmail+"-"+req.files.ppic.name;
+    var filename="nopic.jpg";
+    if(req.files!=null)
+    {
+    filename=req.body.txtEmail+"-"+req.files.ppic.name;
     var filepath=path.join(__dirname,"public","uploads",filename);//".."-> come out of directory
     // console.log(filepath);
     req.files.ppic.mv(filepath);
-
+    }
     var Email=req.body.txtEmail;
     var Name=req.body.txtName;
     var birth=req.body.dob;
@@ -203,4 +210,26 @@ app.post("/do-show",function(req,res){
         }
 
     })
+});
+
+
+
+app.get("/chk-email",function(req,res){
+        var  em=req.query.email;
+        mysqldb.query("select * from profil where emailid=?",[em],function(err,result){
+            if(err==null )
+            {
+                if(result.length==1)
+                {
+                res.send("Already existed");
+                }
+                else{
+                    res.send("available");
+                }
+            }
+            else{
+                res.send(err);
+            }
+    
+        })
 });
