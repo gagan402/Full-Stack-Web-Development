@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shark Tank</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $("#saveDataBtn").click(function () {
+          // alert();
+          var email1 = $("#Email1").val();
+          var pwd1 = $("#Password1").val();
+          var type1 = $("#type").val();
+          var obj = {
+            type: "get",
+            url: "/signup-data",
+            data: {
+              email: email1,
+              pwd: pwd1,
+              type: type1,
+            },
+          };
+
+          $.ajax(obj)
+            .done(function (res) {
+              $("#modalsignup").modal("hide");
+              console.log(res);
+              alert(res);
+            })
+            .fail(function (err) {
+              console.log(err);
+              alert(err);
+            });
+        });
+
+
+
+
+
+
+        $("#logging").click(function () {
+          var email2 = $("#Email2").val();
+          var pwd2 = $("#Password2").val();
+          var obj = {
+            type: "get",
+            url: "/login-data",
+            data: {
+              email: email2,
+              pwd: pwd2,
+            },
+          };
+
+          $.ajax(obj)
+            .done(function (res) {
+              console.log(res);
+              alert(res);
+              $("#modallogin").modal("hide");
+            })
+            .fail(function (err) {
+              console.log(err);
+              alert(err);
+            });
+        });
+        
+      });
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Shark Tank</a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <button
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalsignup"
+                  >
+                    SIGN UP
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button
+                    class="btn btn-success ms-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modallogin"
+                  >
+                    LOGIN
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!-- Modal signup-->
+        <div
+          class="modal fade"
+          id="modalsignup"
+          tabindex="-1"
+          aria-labelledby="modal1Label"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modal1Label">SIGN UP</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="Email1" class="form-label">Email address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="Email1"
+                    aria-describedby="emailHelp"
+                  />
+                  <div id="emailHelp" class="form-text">
+                    We'll never share your email with anyone else.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="Password1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="Password1" />
+                  <div id="passwordHelpBlock" class="form-text">
+                    Your password must be 8-20 characters long, contain letters
+                    and numbers, and must not contain spaces, special
+                    characters, or emoji.
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="type" class="form-label">Type</label>
+                  <select
+                    id="type"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected disbaled>Select Option</option>
+                    <option value="gold">Gold</option>
+                    <option value="silver">Silver</option>
+                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="saveDataBtn">
+                  Sign Up
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal login-->
+        <div
+          class="modal fade"
+          id="modallogin"
+          tabindex="-1"
+          aria-labelledby="modal2Label"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modal2Label">Login</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="Email2" class="form-label">
+                    Enter Email address</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="Email2"
+                    aria-describedby="emailHelp"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="Password2" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="Password2" />
+                </div>
+              </div>
+              <div class="modal-footer">
+               
+                <button type="button" class="btn btn-primary" id="logging">
+                  Login
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
