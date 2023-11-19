@@ -121,7 +121,7 @@ mysqldb.connect(function(err){
 app.post("/signing",function(req,res){
     var filename="nopic.jpg";
 
-    if(req.body.files!=null)
+    if(req.files!=null)
     {
     filename=req.body.txtEmail+"-"+req.files.ppic.name;
     var filepath=path.join(__dirname,"public","uploads",filename);//".."-> come out of directory
@@ -132,7 +132,7 @@ app.post("/signing",function(req,res){
     var Name=req.body.txtName;
     var birth=req.body.dob;
 
-    mysqldb.query("insert into profil values(?,?,?,?,current_date())",[Email,Name,filename,birth],function(err){
+    mysqldb.query("insert into prof values(?,?,?,?,current_date())",[Email,Name,filename,birth],function(err){
         if(err==null)
         {
             res.send("Profile Saved Succesfully");
@@ -147,7 +147,7 @@ app.post("/signing",function(req,res){
 
 app.post("/do-delete",function(req,res){
     var Email=req.body.txtEmail;
-    mysqldb.query("delete from profil where emailid=?",[Email],function(err,result){
+    mysqldb.query("delete from prof where emailid=?",[Email],function(err,result){
         if(err==null )
         {
             if(result.affectedRows==1)
@@ -178,7 +178,7 @@ app.post("/do-update",function(req,res){
     var Name=req.body.txtName;
     var birth=req.body.dob;
     //                               table column names
-    mysqldb.query("update profil set namee=?,picname=?,dob=? where emailid=?",[Name,filename,birth,Email],function(err,result){
+    mysqldb.query("update prof set namee=?,picname=?,dob=? where emailid=?",[Name,filename,birth,Email],function(err,result){
         if(err==null)
         {
             if(result.affectedRows==1)
@@ -200,7 +200,7 @@ app.post("/do-update",function(req,res){
 
 app.post("/do-show",function(req,res){
     // var Email=req.body.txtEmail;
-    mysqldb.query("select * from profil",function(err,result){
+    mysqldb.query("select * from prof",function(err,result){
         if(err==null )
         {
             res.send(result);
@@ -216,7 +216,7 @@ app.post("/do-show",function(req,res){
 
 app.get("/chk-email",function(req,res){
         var  em=req.query.email;
-        mysqldb.query("select * from profil where emailid=?",[em],function(err,result){
+        mysqldb.query("select * from prof where emailid=?",[em],function(err,result){
             if(err==null )
             {
                 if(result.length==1)
@@ -232,4 +232,22 @@ app.get("/chk-email",function(req,res){
             }
     
         })
+});
+
+
+app.get("/search-json",function(req,res){
+      var emailidd=req.query.e;
+      mysqldb.query("select * from prof where emailid=?",[emailidd],function(err,result)
+      {
+        if(err==null )
+        {
+            console.log(result);
+            res.send(result);
+            
+        }
+        else{
+            res.send(err.message);
+        }
+
+    })
 });

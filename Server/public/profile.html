@@ -37,6 +37,37 @@
                             alert(err);
                      })
                });
+
+
+
+
+               $("#btnSearch").click(function(){
+                      var emailid=$("#txtEmail").val();
+                      var obj={
+                        type:"get",
+                        url:"/search-json",
+                        data:{
+                          e:emailid
+                        }
+                      }
+
+                      $.ajax(obj).done(function(jsonObj){
+                        if(jsonObj.length==1)
+                        {
+                        alert(JSON.stringify(jsonObj));
+                        $("#txtNamei").val(jsonObj[0].namee);
+                        $("#dobi").val(jsonObj[0].dob);
+                        $("#prev").prop("src","uploads/"+jsonObj[0].picname);
+                        }
+                      else
+                      {
+                        alert("Invalid user ");
+                      }
+
+                      }).fail(function(err){
+                          alert(err);
+                      })
+               });
           });
     </script>
 </head>
@@ -47,8 +78,9 @@
       <h2>Profile Page</h2>
       <form  method="post" enctype="multipart/form-data">
         Email Id:<input type="text" name="txtEmail" value="gagandeepg973@gmail.com"  id="ggn"><span id="gj">*</span>
+        <input type="button" value="search" id="btnSearch">
         <br>
-        Name:  <input type="text" name="txtName" value="gagan">
+        Name:  <input type="text" name="txtName" id="txtNamei">
         <br>
            Upload pic :<input type="file" name="ppic" onchange="doPrev(this,prev);"> 
            <p>
@@ -56,7 +88,7 @@
            </p>
 
         <br>
-        Date of Birth:<input type="date" name="dob">
+        Date of Birth:<input type="date" name="dob" id="dobi">
 
         <br>
 
