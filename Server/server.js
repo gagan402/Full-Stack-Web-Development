@@ -174,6 +174,10 @@ app.post("/do-update",function(req,res){
     // console.log(filepath);
     req.files.ppic.mv(filepath);
     }
+    else
+    {
+        filename=req.body.hdnn;
+    }
     var Email=req.body.txtEmail;
     var Name=req.body.txtName;
     var birth=req.body.dob;

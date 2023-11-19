@@ -42,7 +42,7 @@
 
 
                $("#btnSearch").click(function(){
-                      var emailid=$("#txtEmail").val();
+                      var emailid=$("#ggn").val();
                       var obj={
                         type:"get",
                         url:"/search-json",
@@ -58,6 +58,7 @@
                         $("#txtNamei").val(jsonObj[0].namee);
                         $("#dobi").val(jsonObj[0].dob);
                         $("#prev").prop("src","uploads/"+jsonObj[0].picname);
+                        $("#hdn").val(jsonObj[0].picname);
                         }
                       else
                       {
@@ -77,6 +78,7 @@
     <!--enctype="multipart/form-data"==== attribute is typically used when you want to upload files, such as images or documents, through a form. -->
       <h2>Profile Page</h2>
       <form  method="post" enctype="multipart/form-data">
+        <input type="hidden" id="hdn" name="hdnn">
         Email Id:<input type="text" name="txtEmail" value="gagandeepg973@gmail.com"  id="ggn"><span id="gj">*</span>
         <input type="button" value="search" id="btnSearch">
         <br>
