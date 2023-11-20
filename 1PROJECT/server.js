@@ -15,8 +15,31 @@ app.get("/",function(req,res){
     res.sendFile(filePath);
 });
 
+const nodemailer = require('nodemailer');
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: 'gagandeep0481.be21@chitkara.edu.in',
+      pass: '123Sarpanch@#$j'
+    }
+  });
 
-
+const sendemail = (userEmail) => {
+    let mailOptions = {
+      from: 'gagandeep0481.be21@chitkara.edu.in',
+      to: userEmail,
+      subject: 'Welcome to Our Website!',
+      text: 'Thank you for signing up. We are excited to have you on board!',
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log('Error sending email:', error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+  };
 
 
 // *********************************Database connectivity********************************
@@ -50,6 +73,7 @@ app.get("/signup-data",function(req,res){
         if(err==null )
         {
             res.send("Data saved by email "+em);
+            sendemail(em);
 
         }
         else{
@@ -184,6 +208,41 @@ app.post("/update-data",function(req,res){
 
 })
 
+
+
+
+app.get("/change-pwd",function(req,res){
+    var cp=req.query.cp;
+    var np=req.query.np;
+     var em="ggn3";
+   
+    mysqldb.query("select pwd from users where emailid=?",[em],function(err,result){
+        if(err==null)
+        {
+        if(cp==result[0].pwd)
+        {
+            mysqldb.query("update users set pwd=? where emailid=?",[np,em],function(err){
+                    if(err==null)
+                    {
+                            res.send("password updated successfully");
+                    }
+                    else{
+                        res.send(err);
+                    }
+            })
+
+        }
+        else{
+            res.send("current password is wrong");
+        }
+    }
+    else{
+        res.send(err);
+    }
+
+    })
+
+});
 
 
 

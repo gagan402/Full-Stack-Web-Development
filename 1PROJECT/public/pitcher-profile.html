@@ -42,6 +42,8 @@
                 $.ajax(obj).done(function(jsonObj){
                   // console.log(jsonObj);
                   // alert(JSON.stringify(jsonObj));
+                  if(jsonObj.length==1)
+                  {
                   $("#txtnamei").val(jsonObj[0].namee);
                   $("#txtcontacti").val(jsonObj[0].contact);
                   $("#txtAddressi").val(jsonObj[0].address);
@@ -52,6 +54,16 @@
                   $("#txtfirmi").val(jsonObj[0].firm);
                   $("#linkedIni").val(jsonObj[0].linkedin);
                   $("#txthdn").val(jsonObj[0].proofpic);
+
+
+
+                  $("#btnupdate").removeAttr("disabled");
+                  }
+                  else{
+                    alert("No user found");
+                    $("#btnsave").removeAttr("disabled")
+                  }
+              
                 }).fail(function(err){
                     console.log(err);
                 })
@@ -62,8 +74,40 @@
 </head>
 <body>
     <div class="container border">
+
+      <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Shark Tank</a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                    <h5> Welcome : gagandeepg973@gmail.com</h5>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
         
-            <form class="row g-3" method="post" enctype="multipart/form-data">
+            <div class="row" >
+              <div class="col-5 offset-5">
+                 <h3> Pitcher-Profile</h3>
+               </div>
+            </div>
+            
+            <form class="row px-5 g-3" method="post" enctype="multipart/form-data">
               <input type="hidden" id="txthdn" name="hdn"> 
                 <div class="col-md-6">
                   <label for="txtEmaili" class="form-label">Email</label>
@@ -71,7 +115,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <button type="button" class="btn btn-primary" id="search">Search</button>
+                    <button type="button" class="btn btn-primary mt-4" id="search">Search</button>
                   </div>
 
                 <div class="col-md-6">
@@ -137,9 +181,9 @@
                   </div>
 
                   <div class="col-12 d-flex align-items-center justify-content-center">
-                    <input type="submit" value="Save"  class="btn btn-primary me-3"  formaction="/save-data">
+                    <input type="submit" value="Save" disabled class="btn btn-primary me-3" id="btnsave"  formaction="/save-data">
                     <!-- <button type="submit" class="btn btn-primary me-3" formaction="/save-data">Save</button> -->
-                    <input type="submit" class="btn btn-primary" formaction="/update-data" value="Update">
+                    <input type="submit" disabled class="btn btn-primary" formaction="/update-data"  id="btnupdate" value="Update">
                   </div>
               </form>
         
