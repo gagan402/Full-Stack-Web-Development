@@ -165,6 +165,27 @@ app.post("/do-delete",function(req,res){
     })
 });
 
+app.get("/do-delete-angular",function(req,res){
+    var Email=req.query.emailid;
+    mysqldb.query("delete from prof where emailid=?",[Email],function(err,result){
+        if(err==null )
+        {
+            if(result.affectedRows==1)
+            {
+                res.send(Email+" Record deleted successfully");
+            }
+            else{
+                res.send("Invalid id");
+            }
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
+
+
 app.post("/do-update",function(req,res){
     var filename="nopic.jpg";
     if(req.files!=null)
@@ -202,7 +223,7 @@ app.post("/do-update",function(req,res){
 });
 
 
-app.post("/do-show",function(req,res){
+app.all("/do-show",function(req,res){
     // var Email=req.body.txtEmail;
     mysqldb.query("select * from prof",function(err,result){
         if(err==null )
