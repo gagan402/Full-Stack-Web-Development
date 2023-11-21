@@ -244,7 +244,54 @@ app.get("/change-pwd",function(req,res){
 
 });
 
+app.get("/fetch-users",function(req,res){
+    mysqldb.query("select * from users",[],function(err,result){
+        if(err==null)
+        {
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
 
+    })
+
+})
+
+app.get("/block-user",function(req,res){
+    var em=req.query.em;
+    var s=0;
+    mysqldb.query("update users set statuss=? where emailid=?",[s,em],function(err,result){
+        if(err==null)
+        {
+            res.send("blocked user");
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+
+
+})
+
+
+app.get("/resume-user",function(req,res){
+    var em=req.query.em;
+    var s=1;
+    mysqldb.query("update users set statuss=? where emailid=?",[s,em],function(err,result){
+        if(err==null)
+        {
+            res.send("resume user");
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+
+
+})
 
 
 
