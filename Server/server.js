@@ -237,6 +237,41 @@ app.all("/do-show",function(req,res){
     })
 });
 
+app.all("/fetch-emails",function(req,res){
+    // var Email=req.body.txtEmail;
+    mysqldb.query("select distinct emailid from prof",function(err,result){
+        if(err==null )
+        {
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
+
+app.get("/fetching-sel",function(req,res){
+    var  em=req.query.emailid;
+    mysqldb.query("select * from prof where emailid=?",[em],function(err,result){
+        if(err==null )
+        {
+            if(result.length==1)
+            {
+            res.send(result);
+            }
+            else{
+                res.send("available");
+            }
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
+
+
 
 
 app.get("/chk-email",function(req,res){

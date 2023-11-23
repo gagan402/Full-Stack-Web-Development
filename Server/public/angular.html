@@ -45,7 +45,40 @@
                             $http.get(url).then(done,fail);
                             function done(res){
                                 // alert(JSON.stringify(res.data));
-                                $scope.jsonArray=res.data;
+                                // $scope.jsonArray=res.data;//for combo box
+                                $scope.jsonArrayFilter=res.data;//for table
+                            }
+
+                            function fail(err){
+                                    alert(err.data);
+                            }
+
+                    }
+
+                    $scope.fetchAllEmails=function(){
+                            var url="/fetch-emails";
+                            $http.get(url).then(done,fail);
+                            function done(res){
+                                // alert(JSON.stringify(res.data));
+                                $scope.jsonArrayEmail=res.data;//for combo box
+                            
+                            }
+
+                            function fail(err){
+                                    alert(err.data);
+                            }
+
+                    }
+                    $scope.doShowSelEmail=function(){
+                        // alert(JSON.stringify($scope.selObj));
+                        
+                        // $scope.jsonArrayFilter=[$scope.selObj];//selected object only in filter
+                        var url="/fetching-sel?emailid="+$scope.selObj.emailid;
+                            $http.get(url).then(done,fail);
+                            function done(res){
+                                // alert(JSON.stringify(res.data));
+                                // $scope.jsonArray=res.data;//for combo box
+                                $scope.jsonArrayFilter=res.data;//single record form table
                             }
 
                             function fail(err){
@@ -58,7 +91,7 @@
     </script>
 </head>
 
-<body  ng-app="mymodule" ng-controller="myController" ng-init="fetchRecords()">
+<body  ng-app="mymodule" ng-controller="myController" ng-init="fetchAllEmails()">
 
     {{uname}}
     <br>
@@ -77,6 +110,12 @@
         Full Name:{{full}}
     </p>
     <center>
+        <select ng-options="obj.emailid for obj in jsonArrayEmail" ng-model="selObj" ng-change="doShowSelEmail();">
+            <option value=""> Select</option>
+        </select>
+
+        <hr>
+
         All Records
       
         <hr>
@@ -89,7 +128,7 @@
                 <th>Picname</th>
                 <th> Actions</th>
             </tr>
-            <tr ng-repeat="obj in jsonArray">
+            <tr ng-repeat="obj in jsonArrayFilter">
                 <td>{{$index+1}}</td>
                 <td>{{obj.emailid}}</td>
                 <td>{{obj.namee}}</td>
