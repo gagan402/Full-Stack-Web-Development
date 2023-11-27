@@ -258,6 +258,56 @@ app.get("/fetch-users",function(req,res){
 
 })
 
+
+
+app.get("/fetch-pitchers",function(req,res){
+    mysqldb.query("select * from pprofiles",[],function(err,result){
+        if(err==null)
+        {
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+
+})
+
+
+app.all("/fetch-City",function(req,res){
+    // var Email=req.body.txtEmail;
+    mysqldb.query("select distinct city from pprofiles",function(err,result){
+        if(err==null )
+        {
+            res.send(result);
+            console.log(result);
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
+
+
+
+
+app.get("/fetching-selected-city",function(req,res){
+    var  c=req.query.City;
+    mysqldb.query("select * from pprofiles where city=?",[c],function(err,result){
+        if(err==null )
+        {
+            // console.log(res);
+            res.send(result);
+
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
 app.get("/block-user",function(req,res){
     var em=req.query.em;
     var s=0;
@@ -297,7 +347,48 @@ app.get("/resume-user",function(req,res){
 
 
 
+app.post("/post-idea",function(req,res){
+    var email=req.body.Nemail;
+    var cat=req.body.Ncategory;
+    var idea=req.body.Nidea;
+    var fmax=req.body.Nfundmax;
+    var fmin=req.body.Nfundmin;
+    var info=req.body.Ninfo;
+    mysqldb.query("insert into ideas values(?,?,?,?,?,?)",[email,cat,idea,fmin,fmax,info],function(err,result){
+        if(err==null)
+        {
+            res.send("idea posted succesfully");
+        }
+        else{
+            res.send(err);
+        }
+    })
 
+});
+
+
+
+
+
+app.get("/do-delete-pitcher",function(req,res){
+    var e=req.query.em;
+    mysqldb.query("delete from pprofiles where email=?",[e],function(err,result){
+        if(err==null )
+        {
+            if(result.affectedRows==1)
+            {
+                res.send(result);
+            }
+            else{
+                res.send("Invalid id");
+            }
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
 
 app.listen(8000,function(){
     console.log("Server Started at port 8000");

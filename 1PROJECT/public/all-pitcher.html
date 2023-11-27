@@ -1,11 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>all-pitcher</title>
-</head>
-<body>
-    
-</body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+
+        var module=angular.module("mymodule",[]);
+            module.controller("myController",function($scope,$http){
+                $scope.fetchAllPitchers=function(){
+                            var url="/fetch-pitchers";
+                            $http.get(url).then(done,fail);
+                            function done(res){
+                                // alert(JSON.stringify(res));
+                                $scope.PitcherArray=res.data;
+                            }
+
+                            function fail(err){
+                                    alert(err.data);
+                            }
+
+                    }
+
+                    $scope.fetchAllCity=function(){
+                            var url="/fetch-City";
+                            $http.get(url).then(done,fail);
+                            function done(res){
+                                // alert(JSON.stringify(res.data));
+                                $scope.ArrayCity=res.data;//for combo box
+                            
+                            }
+
+                            function fail(err){
+                                    alert(err.data);
+                            }
+
+                    }
+
+
+
+                    $scope.doShowSelCity=function(){
+                     
+                        var url="/fetching-selected-city?City="+$scope.selCity.city;
+                            $http.get(url).then(done,fail);
+                            function done(res){
+                              // alert(JSON.stringify(res));
+                              $scope.PitcherArray=res.data;
+                            }
+
+                            function fail(err){
+                                    alert(err.data);
+                            }
+
+                    }
+
+
+
+
+                    $scope.doDeletePitcher=function(email){
+                        if(confirm("R U Sure?")==false)
+                        {
+                            return;
+                        }
+                      
+                        var url="/do-delete-pitcher?em="+email;
+                            $http.get(url).then(done,fail);
+                            function done(res){
+                        
+
+                              if ($scope.selCity) 
+                              {
+                               $scope.doShowSelCity();
+                              }
+                            else{
+                              $scope.fetchAllPitchers();
+                            }
+
+                            function fail(err){
+                                    alert(err.data);
+                            }
+                    }
+                  }
+
+            })
+    </script>
+
+
+
+  </head>
+  <body ng-app="mymodule" ng-controller="myController" ng-init="fetchAllCity()">
+    <div class="container">
+      <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-success border">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Shark Tank</a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navba-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <button class="btn btn-primary">LOG OUT</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="comboCity" class="form-label">Category</label>
+          <select id="comboCity" class="form-select"  ng-model="selCity"  ng-options="obj.city for obj in ArrayCity"  ng-change="doShowSelCity();">
+            <option value="" disabled>Choose...</option>
+          </select>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center">
+          <input type="button" value="Fetch All Pitchers" ng-click="fetchAllPitchers()"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <table class=" table border table-striped">
+            <tr>
+              <th>Sr No.</th>
+              <th>Email </th>
+              <th>Name</th>
+              <th>Contact No.</th>
+              <th>State & City</th>
+              <th> ID Proof</th>
+              <th> Proof Pic</th>
+              <th> LinkedIn Profile</th>
+              <th>Actions</th>
+            </tr>
+
+            <tr  ng-repeat="obj in  PitcherArray">
+                <td>{{$index+1}}</td>
+                <td>{{obj.email}}</td>
+                <td>{{obj.namee}}</td>
+                <td>{{obj.contact}}</td>
+                <td>{{obj.state}}:{{obj.city}}</td>
+                <td>{{obj.idproof}}</td>
+                <td>
+                    <img  ng-src="uploads/{{obj.proofpic}}"   width="100" height="100"  alt="no-pic"/>
+
+                </td>
+                <td>{{obj.linkedin}}</td>
+                <td>
+                    <input type="button" value="Delete"  ng-click="doDeletePitcher(obj.email)"/>
+                </td>
+            </tr>
+          
+          </table>
+
+      </div>
+    </div>
+  </body>
 </html>
