@@ -15,6 +15,10 @@ app.get("/",function(req,res){
     res.sendFile(filePath);
 });
 
+
+app.listen(8000,function(){
+    console.log("Server Started at port 8000");
+})
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -390,6 +394,49 @@ app.get("/do-delete-pitcher",function(req,res){
     })
 });
 
-app.listen(8000,function(){
-    console.log("Server Started at port 8000");
-})
+
+app.get("/fetch-all-categories",function(req,res){
+    mysqldb.query("select distinct category from ideas",function(err,result){
+        if(err==null )
+        {
+            
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
+    })
+});
+
+
+app.get("/get-pitcher-data",function(req,res){
+    var c=req.query.cat;
+    // var mi=req.query.fundmin;
+    var ma=parseFloat(req.query.fundmax);
+    mysqldb.query("select * from ideas where category=?  and fmax<=?",[c,ma],function(err,result){
+        if(err==null )
+        {
+            // console.log(result);
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
+
+app.get("/selected-pitcher-data",function(req,res){
+    var e=req.query.eml;
+    mysqldb.query("select * from pprofiles where email=?",[e],function(err,result){
+        if(err==null )
+        {
+            // console.log(result);
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
