@@ -440,3 +440,87 @@ app.get("/selected-pitcher-data",function(req,res){
 
     })
 });
+
+
+
+
+
+
+app.post("/save-shark-data",function(req,res){
+    var email=req.body.txtEmail;
+    var name=req.body.txtname;
+    var contact=req.body.txtcontact;
+    var company=req.body.txtCompany;
+    var website=req.body.txtWebsite;
+    var worth=req.body.netWorth;
+    var funded=req.body.funded;
+    var information=req.body.Ninfo;
+
+  
+    mysqldb.query("insert into sharks values(?,?,?,?,?,?,?,?)",[email,name,contact,company,website,worth,funded,information],function(err,result){
+        if(err==null)
+        {
+            console.log(result);
+            res.send("Profile of shark  Saved Succesfully");
+        }
+        else
+        {
+            res.send(err.message );
+        }
+    });
+
+});
+
+
+
+
+app.post("/update-shark-data",function(req,res){
+
+    var email=req.body.txtEmail;
+    var name=req.body.txtname;
+    var contact=req.body.txtcontact;
+    var company=req.body.txtCompany;
+    var website=req.body.txtWebsite;
+    var worth=req.body.netWorth;
+    var funded=req.body.funded;
+    var information=req.body.Ninfo;
+
+
+   
+    mysqldb.query("update sharks set  namee=?,contact=?,company=?,website=?,worth=?,funded=?,info=? where email=?",[name,contact,company,website,worth,funded,information,email],function(err,result){
+        if(err==null)
+        {
+            console.log(result);
+            res.send("Profile of shark  Updated Succesfully");
+        }
+
+        else
+        {
+            res.send(err.message );
+        }
+    });
+
+
+})
+
+
+app.get("/search-shark",function(req,res){
+    var e=req.query.em;
+    mysqldb.query("select * from sharks where email=?",[e],function(err,result){
+        if(err==null)
+        {
+            if(result.length==1)
+            {
+            res.send(result);
+            }
+            else{
+                res.send("No shark found");
+            }
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+
+})

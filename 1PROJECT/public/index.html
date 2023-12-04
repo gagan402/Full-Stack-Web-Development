@@ -22,7 +22,12 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+    <style>
+      .carousel-height {
+  height: 500px; 
+}
+    </style>
+ 
     <script>
       $(document).ready(function () {
         $("#saveDataBtn").click(function () {
@@ -105,9 +110,22 @@
 
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ms-auto">
+
+
+                <li class="nav-item" >
+                  <a href="#service"  class="btn btn-primary ms-2" >Services</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="#"  class="btn btn-primary ms-2 " >Developers</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="#"  class="btn btn-primary ms-2" >Reach Us</a>
+                </li>
                 <li class="nav-item">
                   <button
-                    class="btn btn-primary"
+                    class="btn btn-primary ms-2"
                     data-bs-toggle="modal"
                     data-bs-target="#modalsignup"
                   >
@@ -116,17 +134,106 @@
                 </li>
                 <li class="nav-item">
                   <button
-                    class="btn btn-success ms-2"
+                    class="btn btn-primary ms-2"
                     data-bs-toggle="modal"
                     data-bs-target="#modallogin"
                   >
                     LOGIN
                   </button>
                 </li>
+
+
+               
+
+              
+
+
+             
               </ul>
             </div>
           </div>
         </nav>
+
+
+
+
+        <div class="row mt-3">
+          <div id="carouselExampleControls" class="carousel slide carousel-height" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/shark-tank-india.avif" class="d-block w-100 "  height="500" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="images/shark-tank-india.avif" class="d-block w-100" height="500"  alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="images/shark-tank-india.avif" class="d-block w-100" height="500"  alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+        </div>
+
+        <div class="row bg-success d-flex justify-content-center align-items-center   mt-3 mb-3"  id="service">
+          <div class="col text-center">
+          <h1>Our Services</h1>
+        </div>
+           
+        </div>
+
+        <div class="row justify-content-between">
+
+          <div class="card" style="width: 18rem;">
+            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Sharks</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              
+            </div>
+          </div>
+
+
+          <div class="card" style="width: 18rem;">
+            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Pitchers</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            
+            </div>
+          </div>
+
+
+          <div class="card" style="width: 18rem;">
+            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Goal</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+
+
+          <div class="card" style="width: 18rem;">
+            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Showcase Ideas</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          
+            </div>
+          </div>
+
+        </div>
+
+
+
+
         <!-- Modal signup-->
         <div
           class="modal fade"
@@ -153,7 +260,7 @@
                     type="text"
                     class="form-control"
                     id="Email1"
-                    aria-describedby="emailHelp"
+                  aria-describedby="emailHelp"
                   />
                   <div id="emailHelp" class="form-text">
                     We'll never share your email with anyone else.
