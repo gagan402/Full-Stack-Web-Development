@@ -93,18 +93,23 @@ app.get("/login-data",function(req,res){
     var  em=req.query.email;
     var  pw=req.query.pwd;
     
-    mysqldb.query("select utype from users where emailid=? and pwd=?",[em,pw],function(err,result){
+    mysqldb.query("select utype,statuss from users where emailid=? and pwd=?",[em,pw],function(err,result){
         if(err==null )
         {
-            if(result.length==1)
+            if(result.length==1 && result[0].statuss==1)
             {
                 var t=result[0].utype;
                 // console.log(result+" "+t);
                  res.send(t);
             }
             else
+            if(result.length==1 && result[0].statuss==0)
             {
-                res.send("Not found");
+                res.send("You are Blocked");
+            }
+            else
+            {
+                res.send("Invalid Email Or Password");
             }
 
         }

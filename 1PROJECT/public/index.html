@@ -80,19 +80,22 @@
               // alert(res);
               if(res==="pitcher")
               {
+                localStorage.setItem("activeUser",email2);
                 location.href="dash-pitcher.html";
+
               }
               else
               if(res==="shark")
               {
+                localStorage.setItem("activeUser",email2);
                 location.href="dash-shark.html";
               }
               else{
-                alert("Invalid User");
+                alert(res);
               }
               
 
-              $("#modallogin").modal("hide");
+              // $("#modallogin").modal("hide");
             })
             .fail(function (err) {
               console.log(err);
@@ -174,14 +177,17 @@
         <div class="row mt-3">
           <div id="carouselExampleControls" class="carousel slide carousel-height" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="images/shark-tank-india.avif" class="d-block w-100 "  data-bs-interval="20000"  height="630" alt="...">
+              <div class="carousel-item active" data-bs-interval="950">
+                <img src="images/shark-tank-india.avif" class="d-block w-100 "    height="630" alt="...">
               </div>
-              <div class="carousel-item">
-                <img src="images/shark-tank-india.avif" class="d-block w-100"  data-bs-interval="20000" height="630"  alt="...">
+              <div class="carousel-item" data-bs-interval="1000">
+                <img src="images/shark-tank-india.avif" class="d-block w-100"  height="630"  alt="...">
               </div>
-              <div class="carousel-item">
-                <img src="images/shark-tank-india.avif" class="d-block w-100"  data-bs-interval="20000"  height="630"  alt="...">
+              <div class="carousel-item" data-bs-interval="1000">
+                <img src="images/shark-tank-india.avif" class="d-block w-100"  height="630"  alt="...">
+              </div>
+              <div class="carousel-item" data-bs-interval="1000">
+                <img src="images/shark-tank-india.avif" class="d-block w-100"   height="630"  alt="...">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
