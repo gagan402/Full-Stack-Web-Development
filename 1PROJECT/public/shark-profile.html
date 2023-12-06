@@ -56,16 +56,24 @@
       
     })
   </script>
+  <script>
+    function displayUser()
+    {
+      var activeUserss=localStorage.getItem("activeUser");
+      document.querySelector("#wuser").innerHTML="Welcome : "+activeUserss;
+  
+    }
+  </script>
 
 </head>
-<body>
-    <div class="container">
+<body  onload="displayUser();">
+    <div  class="container">
         <div class="row">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-success border">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">Shark Tank</a>
-      
+                  <h2 id="wuser"></h2>
                   <button
                     class="navbar-toggler"
                     type="button"
@@ -78,13 +86,13 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
       
-                  <div class="collapse navbar-collapse" id="navbarNav">
+                  <!-- <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                       <li class="nav-item">
                         <button class="btn btn-primary">LOGOUT</button>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
               </nav>
 

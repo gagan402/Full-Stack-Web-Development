@@ -76,7 +76,7 @@ app.get("/signup-data",function(req,res){
     mysqldb.query("insert into users values(?,?,?,current_date(),1)",[em,pw,ty],function(err){
         if(err==null )
         {
-            res.send("Data saved by email "+em);
+            res.send(ty);
             sendemail(em);
 
         }
@@ -529,3 +529,60 @@ app.get("/search-shark",function(req,res){
     })
 
 })
+
+
+
+
+
+app.get("/get-shark-data",function(req,res){
+    var worth=parseFloat(req.query.w);
+    var fundc=parseFloat(req.query.f);
+    mysqldb.query("select * from sharks where worth>=? and funded>=?",[worth,fundc],function(err,result){
+        if(err==null )
+        {
+            // console.log(result);
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});
+
+
+
+app.get("/fetch-sharks",function(req,res){
+    mysqldb.query("select * from sharks",[],function(err,result){
+        if(err==null)
+        {
+            res.send(result);
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+
+})
+
+
+app.get("/do-delete-shark",function(req,res){
+    var e=req.query.em;
+    mysqldb.query("delete from sharks where email=?",[e],function(err,result){
+        if(err==null )
+        {
+            if(result.affectedRows==1)
+            {
+                res.send(result);
+            }
+            else{
+                res.send("Invalid id");
+            }
+        }
+        else{
+            res.send(err);
+        }
+
+    })
+});

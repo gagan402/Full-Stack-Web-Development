@@ -72,13 +72,22 @@
 
         })
     </script>
+     <script>
+      function displayUser()
+      {
+        var activeUserss=localStorage.getItem("activeUser");
+        document.querySelector("#wuser").innerHTML="Welcome : "+activeUserss;
+    
+      }
+    </script>
 </head>
-<body   ng-app="mymodule" ng-controller="myController" ng-init="fetchAllCategories();">
+<body onload="displayUser();"  ng-app="mymodule" ng-controller="myController" ng-init="fetchAllCategories();">
     <div class="container">
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-success border">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="#">Shark Tank</a>
+                  <h2 id="wuser"></h2>
       
                   <button
                     class="navbar-toggler"
@@ -92,13 +101,13 @@
                     <span class="navbar-toggler-icon"></span>
                   </button>
       
-                  <div class="collapse navba-collapse" id="navbarNav">
+                  <!-- <div class="collapse navba-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                       <li class="nav-item">
                         <button class="btn btn-primary">LOG OUT</button>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 </div>
               </nav>
 

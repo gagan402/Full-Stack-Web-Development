@@ -37,6 +37,13 @@
           document.querySelector("#txtEmaili").value = activeUserss;
           fetchPitchers();
         }
+
+
+        var activeUserss=localStorage.getItem("activeUser");
+        $("#wuser").html("Welcome : "+activeUserss);
+
+
+
         $("#search").click(function(){
                 fetchPitchers();    
       });
@@ -86,7 +93,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-success border">
           <div class="container-fluid">
             <a class="navbar-brand" href="#">Shark Tank</a>
-
+            <h2 id="wuser"></h2>
             <button
               class="navbar-toggler"
               type="button"
@@ -98,12 +105,12 @@
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
+            
+            <!-- <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ms-auto">
-                <!-- <h5> Welcome : gagandeepg973@gmail.com</h5> -->
+                <h5> Welcome : gagandeepg973@gmail.com</h5>
               </ul>
-            </div>
+            </div> -->
           </div>
         </nav>
       </div>

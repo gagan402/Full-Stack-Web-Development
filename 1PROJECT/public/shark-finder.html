@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shark-finder</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script>
+        var module=angular.module("mymodule",[]);
+        module.controller("myController",function($scope,$http){
+           
+            
+                    $scope.sharksData=function(){
+
+                        var url="/get-shark-data?w="+$scope.worth+"&f="+$scope.fundN;
+                        $http.get(url).then(done,fail);
+                        function done(res){
+                            // alert(JSON.stringify(res.data));
+                            // console.log(JSON.stringify(res.data));
+                                $scope.SharkArray=res.data;
+                                if($scope.SharkArray.length==0)
+                                {
+                                  alert("No data avilable");
+                                }
+                        }
+
+                        function fail(err){
+                            alert(err.data);
+                        }
+
+                    }
+                    
+
+                   
+
+
+        })
+    </script>
+
+<script>
+  function displayUser()
+  {
+    var activeUserss=localStorage.getItem("activeUser");
+    document.querySelector("#wuser").innerHTML="Welcome : "+activeUserss;
+
+  }
+</script>
+</head>
+<body onload="displayUser();"  ng-app="mymodule" ng-controller="myController" ng-init="fetchAllCategories();">
+    <div class="container">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light bg-success border">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">Shark Tank</a>
+                  <h2 id="wuser"></h2>
+                  <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                  >
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+      
+                  <!-- <div class="collapse navba-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                      <li class="nav-item">
+                        <button class="btn btn-primary">LOG OUT</button>
+                      </li>
+                    </ul>
+                  </div> -->
+                </div>
+              </nav>
+
+        </div>
+
+
+
+
+        <div class="row">
+            <h3>SHARK-FINDER</h3>
+
+        </div>
+
+
+        <div class="row">
+           
+            <div class="col-md-4">
+                <label for="netWorth" class="form-label" >Minimum Net Worth:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="netWorth"
+                   ng-model="worth"
+                
+                />
+
+            </div>
+            <div class="col-md-4">
+                <label for="fundcompany" class="form-label">Minimum Number of Funded Companies:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="fundcompany"
+                  ng-model="fundN"
+                />
+
+            </div>
+
+        </div>
+
+
+        <div class="row mt-3">
+            <input type="button" value="SEARCH NOW"  ng-click="sharksData()">
+
+        </div>
+
+
+
+        <div class="row mt-3">
+            <div class="col-md-3" ng-repeat="obj in SharkArray">
+                <div class="card">
+                    <div class="card-body">
+                      <p class="card-text">Name:{{obj.namee}}</p>
+                      <p class="card-text" >Email:{{obj.email}}</p>
+                      <p class="card-text">Company:{{obj.company}}</p>
+                      <p class="card-text">Website:{{obj.website}}</p>
+                      <p class="card-text">Contact No.:{{obj.contact}}</p>
+                      <p class="card-text">Net Worth Of Company:{{obj.worth}}</p>
+                      <p class="card-text">Already Funded Companies:{{obj.funded}}</p>
+                      <p class="card-text">Other Information:{{obj.info}}</p>
+                    </div>
+                  </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    
+</body>
+</html>

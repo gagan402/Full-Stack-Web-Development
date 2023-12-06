@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>all-pitcher</title>
+    <title>all-sharks</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -20,12 +20,12 @@
 
         var module=angular.module("mymodule",[]);
             module.controller("myController",function($scope,$http){
-                $scope.fetchAllPitchers=function(){
-                            var url="/fetch-pitchers";
+                $scope.fetchAllSharks=function(){
+                            var url="/fetch-sharks";
                             $http.get(url).then(done,fail);
                             function done(res){
                                 // alert(JSON.stringify(res));
-                                $scope.PitcherArray=res.data;
+                                $scope.SharkArray=res.data;
                             }
 
                             function fail(err){
@@ -34,64 +34,29 @@
 
                     }
 
-                    $scope.fetchAllCity=function(){
-                            var url="/fetch-City";
-                            $http.get(url).then(done,fail);
-                            function done(res){
-                                // alert(JSON.stringify(res.data));
-                                $scope.ArrayCity=res.data;//for combo box
-                            
-                            }
-
-                            function fail(err){
-                                    alert(err.data);
-                            }
-
-                    }
-
-
-
-                    $scope.doShowSelCity=function(){
-                     
-                        var url="/fetching-selected-city?City="+$scope.selCity.city;
-                            $http.get(url).then(done,fail);
-                            function done(res){
-                              // alert(JSON.stringify(res));
-                              $scope.PitcherArray=res.data;
-                            }
-
-                            function fail(err){
-                                    alert(err.data);
-                            }
-
-                    }
+                
 
 
 
 
-                    $scope.doDeletePitcher=function(email){
+
+                    $scope.doDeleteShark=function(email){
                         if(confirm("R U Sure?")==false)
                         {
                             return;
                         }
                       
-                        var url="/do-delete-pitcher?em="+email;
+                        var url="/do-delete-shark?em="+email;
                             $http.get(url).then(done,fail);
                             function done(res){
-                        
-
-                              if ($scope.selCity) 
-                              {
-                               $scope.doShowSelCity();
-                              }
-                            else{
-                              $scope.fetchAllPitchers();
+                
+                              $scope.fetchAllSharks();
+                            
                             }
-
                             function fail(err){
                                     alert(err.data);
                             }
-                    }
+                    
                   }
 
             })
@@ -100,7 +65,7 @@
 
 
   </head>
-  <body ng-app="mymodule" ng-controller="myController" ng-init="fetchAllCity();fetchAllPitchers()">
+  <body ng-app="mymodule" ng-controller="myController">
     <div class="container">
       <div class="row">
         <nav class="navbar navbar-expand-lg navbar-light bg-success border">
@@ -131,15 +96,9 @@
       </div>
 
       <div class="row">
-        <div>
-          <label for="comboCity" class="form-label">Category</label>
-          <select id="comboCity" class="form-select"  ng-model="selCity"  ng-options="obj.city for obj in ArrayCity"  ng-change="doShowSelCity();">
-            <option value="" disabled>Choose...</option>
-          </select>
-        </div>
 
         <div class="d-flex align-items-center justify-content-center">
-          <input type="button" value="Fetch All Pitchers" ng-click="fetchAllPitchers()"/>
+          <input type="button" value="Fetch All Sharks" ng-click="fetchAllSharks()"/>
         </div>
       </div>
 
@@ -150,27 +109,24 @@
               <th>Email </th>
               <th>Name</th>
               <th>Contact No.</th>
-              <th>State & City</th>
-              <th> ID Proof</th>
-              <th> Proof Pic</th>
-              <th> LinkedIn Profile</th>
+              <th>Name of Company</th>
+              <th> Company Website </th>
+              <th> Net Worth of Company</th>
+              <th> Already Funded How Many companies:</th> 
               <th>Actions</th>
             </tr>
 
-            <tr  ng-repeat="obj in  PitcherArray">
+            <tr  ng-repeat="obj in  SharkArray">
                 <td>{{$index+1}}</td>
                 <td>{{obj.email}}</td>
                 <td>{{obj.namee}}</td>
                 <td>{{obj.contact}}</td>
-                <td>{{obj.state}}:{{obj.city}}</td>
-                <td>{{obj.idproof}}</td>
+                <td>{{obj.company}}</td>
+                <td>{{obj.website}}</td>
+                <td>{{obj.worth}}</td>
+                <td>{{obj.funded}}</td>
                 <td>
-                    <img  ng-src="uploads/{{obj.proofpic}}"   width="100" height="100"  alt="no-pic"/>
-
-                </td>
-                <td>{{obj.linkedin}}</td>
-                <td>
-                    <input type="button" value="Delete"  ng-click="doDeletePitcher(obj.email)"/>
+                    <input type="button" value="Delete"  ng-click="doDeleteShark(obj.email)"/>
                 </td>
             </tr>
           

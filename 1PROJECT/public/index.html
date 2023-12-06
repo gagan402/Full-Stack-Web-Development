@@ -47,9 +47,22 @@
 
           $.ajax(obj)
             .done(function (res) {
-              $("#modalsignup").modal("hide");
-              console.log(res);
-              alert(res);
+
+              if(res==="pitcher")
+              {
+                localStorage.setItem("activeUser",email1);
+                location.href="dash-pitcher.html";
+
+              }
+              else
+              if(res==="shark")
+              {
+                localStorage.setItem("activeUser",email1);
+                location.href="dash-shark.html";
+              }
+              // $("#modalsignup").modal("hide");
+              // console.log(res);
+              // alert(res);
             })
             .fail(function (err) {
               console.log(err);
