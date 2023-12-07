@@ -44,9 +44,9 @@
 
 
 
-        $("#search").click(function(){
-                fetchPitchers();    
-      });
+      //   $("#search").click(function(){
+      //           fetchPitchers();    
+      // });
 
        function fetchPitchers(){
           var email = $("#txtEmaili").val();
@@ -75,10 +75,7 @@
                 $("#txthdn").val(jsonObj[0].proofpic);
 
                 // $("#btnupdate").removeAttr("disabled");
-              } else {
-                alert("No user found");
-                // $("#btnsave").removeAttr("disabled");
-              }
+              } 
             })
             .fail(function (err) {
               console.log(err);
@@ -123,7 +120,7 @@
 
       <form class="row px-5 g-3" method="post" enctype="multipart/form-data">
         <input type="hidden" id="txthdn" name="hdn" />
-        <div class="col-md-6">
+        <div class="col-md-12">
           <label for="txtEmaili" class="form-label">Email</label>
           <input
             type="email"
@@ -133,11 +130,11 @@
           />
         </div>
 
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <button type="button" class="btn btn-primary mt-4" id="search">
             Search
           </button>
-        </div>
+        </div> -->
 
         <div class="col-md-6">
           <label for="txtnamei" class="form-label">Name</label>
