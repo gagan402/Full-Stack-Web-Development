@@ -10,6 +10,8 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
@@ -26,12 +28,52 @@
       .carousel-height {
   height: 630px; 
 }
+
+
+
+
+
+
+.input-container {
+  position: relative;
+}
+
+.input-container input {
+  padding-right: 40px; /* Increased space for icon and span */
+}
+
+.input-container #togglePassword,
+.input-container #pwdCheck ,
+.input-container #emailCheck
+{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-container  #pwdCheck {
+  right: 30px; /* Adjust this value for desired icon spacing */
+  z-index: 1;
+}
+
+.input-container #togglePassword,
+.input-container #emailCheck
+{
+  right: 7px; /* Adjust this value for desired span spacing */
+}
+
+
+
     </style>
  
     <script>
       $(document).ready(function () {
         $("#saveDataBtn").click(function () {
-          // alert();
+          const emaill=$("#emailCheck").text();
+          const pwdd=$("#pwdCheck").text();
+
+          if(emaill=="✅" && pwdd=="✅" && ($("#type").val()!=="none"))
+          {
           var email1 = $("#Email1").val();
           var pwd1 = $("#Password1").val();
           var type1 = $("#type").val();
@@ -68,10 +110,17 @@
               console.log(err);
               alert(err);
             });
+
+          }
+
+          else{
+            alert("Check your credentials.");
+          
+          }
         });
 
 
-
+      
 
 
 
@@ -115,7 +164,57 @@
               alert(err);
             });
         });
+
+
+
+
+
+
         
+    //email validation
+    $("#Email1").blur(function(){
+        var r=/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
+        var email=$("#Email1").val();
+        if(r.test(email)==true)
+        {
+            $("#emailCheck").html("✅");
+        }
+        else{
+            
+            $("#emailCheck").html("❌");
+        }
+    });
+
+      //password validation
+      $("#Password1").blur(function(){
+        var r=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        var pass=$("#Password1").val();
+        if(r.test(pass)==true)
+        {
+            $("#pwdCheck").html("✅");
+        }
+        else{
+            $("#pwdCheck").html("❌");
+        }
+    });
+
+
+
+    $(".hi").mousedown(function(){
+            $(".hi").removeClass("fa-eye").addClass("fa-eye-slash");
+            $("#Password1").prop("type","text");
+            $("#Password2").prop("type","text");
+
+    });
+
+    $(".hi").mouseup(function(){
+        $(".hi").removeClass("fa-eye-slash").addClass("fa-eye");
+            $("#Password1").prop("type","password");
+            $("#Password2").prop("type","password");
+    });
+
+    
+
       });
     </script>
   </head>
@@ -307,35 +406,45 @@
                 ></button>
               </div>
               <div class="modal-body">
-                <div class="mb-3">
+                <div class="mb-3" >
+                  <i class="fa-solid fa-envelope"></i>
                   <label for="Email1" class="form-label">Email address</label>
+                  <div class="input-container">
                   <input
                     type="text"
                     class="form-control"
                     id="Email1"
                   aria-describedby="emailHelp"
+                  required
                   />
+                  <span id="emailCheck"></span>
+                </div>
                   <div id="emailHelp" class="form-text">
                     We'll never share your email with anyone else.
                   </div>
                 </div>
-                <div class="mb-3">
-                  <label for="Password1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="Password1" />
+                <div class="mb-3" >
+                  <i class="fa-solid fa-lock"></i>
+                  <label for="Password1" class="form-label">Set Password</label>
+                  <div class="input-container">
+                  <input type="password" class="form-control" id="Password1"  required/>
+                   <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hi"></i>
+                   <span id="pwdCheck"></span>
+                  </div>
                   <div id="passwordHelpBlock" class="form-text">
-                    Your password must be 8-20 characters long, contain letters
-                    and numbers, and must not contain spaces, special
-                    characters, or emoji.
+                    Your Password must be of 6 to 20 characters which contain at least one numeric digit,  one uppercase and one lowercase letter.
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="type" class="form-label">Type</label>
+                  <i class="fa-solid fa-user"></i>
+                  <label for="type" class="form-label">User Type</label>
                   <select
                     id="type"
                     class="form-select"
                     aria-label="Default select example"
+                    required
                   >
-                    <option selected disbaled>Select Option</option>
+                    <option  value="none"selected>Select Option</option>
                     <option value="pitcher">Pitcher</option>
                     <option value="shark">Shark</option>
                   </select>
@@ -345,13 +454,7 @@
                 <button type="button" class="btn btn-primary" id="saveDataBtn">
                   Sign Up
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
+               
               </div>
             </div>
           </div>
@@ -376,21 +479,33 @@
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
-                <div class="mb-3">
-                  <label for="Email2" class="form-label">
-                    Enter Email address</label
-                  >
+               <div class="modal-body">
+                <div class="mb-3" >
+                  <i class="fa-solid fa-envelope"></i>
+                  <label for="Email2" class="form-label">Email address</label>
+                  <div class="input-container">
                   <input
-                    type="text"
+                    type="email"
                     class="form-control"
                     id="Email2"
-                    aria-describedby="emailHelp"
+                  aria-describedby="emailHelp"
+                  required
                   />
+                  
                 </div>
+
+                  
+
+           <br>
                 <div class="mb-3">
+                  <i class="fa-solid fa-lock"></i>
                   <label for="Password2" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="Password2" />
+                  <div class="input-container">
+                    <input type="password" class="form-control" id="Password2" />
+                     <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hi"></i>
+                    
+                    </div>
+                  
                 </div>
               </div>
               <div class="modal-footer">
@@ -398,13 +513,7 @@
                 <button type="button" class="btn btn-primary" id="logging">
                   Login
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
+               
               </div>
             </div>
           </div>

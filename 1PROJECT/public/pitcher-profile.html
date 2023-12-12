@@ -74,13 +74,37 @@
                 $("#linkedIni").val(jsonObj[0].linkedin);
                 $("#txthdn").val(jsonObj[0].proofpic);
 
-                // $("#btnupdate").removeAttr("disabled");
+                
+                $("#btnsave").prop("disabled",true);
+                $("#btnupdate").prop("disabled",false);
+                $("#idprooffilei").removeAttr("required");
               } 
+              else{
+                $("#btnsave").prop("disabled",false);
+                $("#btnupdate").prop("disabled",true);
+              } 
+              
             })
             .fail(function (err) {
               console.log(err);
             });
         };
+
+
+            
+
+        
+  //       $('#txtfirmi').on('change', function() {
+  //   const companyLink = $(this).val();
+  //   $('#txtfirmi').wrap(`<a href="${companyLink}" target="_blank"></a>`);
+  // });
+
+  // $('#linkedIni').on('change', function() {
+  //   const linkedInProfile = $(this).val();
+  //   $('#linkedIni').wrap(`<a href="${linkedInProfile}" target="_blank"></a>`);
+  // });
+
+
       });
     </script>
   </head>
@@ -103,11 +127,7 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             
-            <!-- <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                <h5> Welcome : gagandeepg973@gmail.com</h5>
-              </ul>
-            </div> -->
+           
           </div>
         </nav>
       </div>
@@ -127,14 +147,12 @@
             id="txtEmaili"
             class="form-control"
             name="txtEmail"
+            readonly
+            required
           />
         </div>
 
-        <!-- <div class="col-md-6">
-          <button type="button" class="btn btn-primary mt-4" id="search">
-            Search
-          </button>
-        </div> -->
+    
 
         <div class="col-md-6">
           <label for="txtnamei" class="form-label">Name</label>
@@ -143,6 +161,7 @@
             id="txtnamei"
             class="form-control"
             name="txtname"
+            required
           />
         </div>
 
@@ -153,6 +172,7 @@
             id="txtcontacti"
             class="form-control"
             name="txtcontact"
+            required
           />
         </div>
 
@@ -164,6 +184,7 @@
             class="form-control"
             name="txtAddress"
             placeholder="1234 Main St"
+            required
           />
         </div>
 
@@ -174,22 +195,60 @@
             id="txtCityi"
             class="form-control"
             name="txtCity"
+            required
           />
         </div>
         <div class="col-md-6">
           <label for="txtStatei" class="form-label">State</label>
-          <select name="txtState" id="txtStatei" class="form-select">
-            <option disabled>Choose...</option>
-            <option>1</option>
-          </select>
+          <select name="txtState" id="txtStatei" class="form-select"required>
+            <option disabled selected>Choose State...</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+        </select>
+        
         </div>
 
         <div class="col-md-6">
           <label for="idproofi" class="form-label">Identity Proof</label>
-          <select name="idproof" id="idproofi" class="form-select">
-            <option selected>Choose...</option>
-            <option>1</option>
+         
+
+            <select name="idproof" id="idproofi" class="form-select" required>
+              <option disabled selected>Choose ID Proof...</option>
+              <option value="passport">Passport</option>
+              <option value="driver_license">Driver's License</option>
+              <option value="voter_id">Voter ID</option>
+              <option value="aadhar_card">Aadhar Card</option>
+              <option value="pan_card">PAN Card</option>
+              <option value="school_id">School ID</option>
+            
           </select>
+          
         </div>
 
         <div class="col-md-4">
@@ -200,13 +259,15 @@
             type="file"
             class="form-control"
             name="idprooffile"
-            if="idprooffilei"
+            id="idprooffilei"
+            accept="image/jpeg, image/png"
+            required
             onchange="doPrev(this,prev);"
           />
         </div>
         <div class="col-md-2">
           <img
-            src="images/profile-icon.jpg"
+            src=""
             style="width: 90%; height: 90%; border: 2px solid red"
             id="prev"
           />
@@ -221,6 +282,7 @@
             id="txtfirmi"
             class="form-control"
             name="txtfirm"
+            required
           />
         </div>
 
@@ -231,6 +293,7 @@
             id="linkedIni"
             class="form-control"
             name="linkedIn"
+            required
           />
         </div>
 

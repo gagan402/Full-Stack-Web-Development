@@ -58,7 +58,8 @@
                     $("#fundedi").val(jsonObj[0].funded)
                     $("#otherinfo").val(jsonObj[0].info);
 
-
+                  
+                    $('#btnsave').prop('disabled', true);
                     }
                   } ).fail(function(err){
                       console.log(err);
@@ -66,7 +67,15 @@
 
                 }
 
-      
+
+   $("#btnupdate").click(
+    function(){
+       alert("helolo");
+       $('#btnupdate').prop('disabled', true);
+    }
+   );
+
+  
     });
     </script>
     <script></script>

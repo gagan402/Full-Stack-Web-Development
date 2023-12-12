@@ -108,8 +108,13 @@ app.get("/login-data",function(req,res){
                 res.send("You are Blocked");
             }
             else
+            if(em=="" || pw=="")
             {
-                res.send("Invalid Email Or Password");
+                res.send("Plz fill credentials! ")
+            }
+            else
+            {
+                res.send("Wrong Email Or Password");
             }
 
         }
@@ -223,7 +228,7 @@ app.post("/update-data",function(req,res){
 app.get("/change-pwd",function(req,res){
     var cp=req.query.cp;
     var np=req.query.np;
-     var em="ggn3";
+     var em=req.query.em;
    
     mysqldb.query("select pwd from users where emailid=?",[em],function(err,result){
         if(err==null)
@@ -466,7 +471,9 @@ app.post("/save-shark-data",function(req,res){
         if(err==null)
         {
             console.log(result);
-            res.send("Profile of shark  Saved Succesfully");
+            // res.send("Profile of shark  Saved Succesfully");
+            res.redirect('/shark-profile.html');
+            
         }
         else
         {
@@ -496,7 +503,13 @@ app.post("/update-shark-data",function(req,res){
         if(err==null)
         {
             console.log(result);
-            res.send("Profile of shark  Updated Succesfully");
+            // res.send("Profile of shark  Updated Succesfully");
+             res.redirect('/shark-profile.html');
+            // setTimeout(function() {
+            //     res.redirect('/success.html');
+            // }, 1000);
+
+            
         }
 
         else
@@ -504,9 +517,14 @@ app.post("/update-shark-data",function(req,res){
             res.send(err.message );
         }
     });
-
-
+   
+    
+  
+   
 })
+
+
+
 
 
 app.get("/search-shark",function(req,res){

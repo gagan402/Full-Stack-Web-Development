@@ -50,6 +50,7 @@
         type:"get",
         url:"/change-pwd",
         data:{
+          em:localStorage.getItem("activeUser"),
           cp:currp,
           np:newp
         }
