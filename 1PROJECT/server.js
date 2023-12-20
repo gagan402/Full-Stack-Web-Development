@@ -151,7 +151,8 @@ app.post("/save-data",function(req,res){
         if(err==null)
         {
             console.log(result);
-            res.send("Profile Saved Succesfully");
+            // res.send("Profile Saved Succesfully");
+            res.redirect('/pitcher-profile.html');
         }
         else
         {
@@ -210,7 +211,8 @@ app.post("/update-data",function(req,res){
         if(err==null)
         {
             console.log(result);
-            res.send("Profile Updated Succesfully");
+            // res.send("Profile Updated Succesfully");
+            res.redirect('/pitcher-profile.html');
         }
 
         else
@@ -371,7 +373,8 @@ app.post("/post-idea",function(req,res){
     mysqldb.query("insert into ideas values(?,?,?,?,?,?)",[email,cat,idea,fmin,fmax,info],function(err,result){
         if(err==null)
         {
-            res.send("idea posted succesfully");
+            // res.send("idea posted succesfully");
+            res.redirect('/post-idea.html');
         }
         else{
             res.send(err);

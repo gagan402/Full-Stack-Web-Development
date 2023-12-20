@@ -15,11 +15,32 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+    <style>
+      .input-container {
+      position: relative;
+    }
+    
+    .input-container input {
+      padding-right: 40px; /* Increased space for icon and span */
+    }
+    
+    .input-container #togglePassword
+    {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .input-container #togglePassword
+    {
+      right: 7px; /* Adjust this value for desired span spacing */
+    }
+    
+    </style>
 <script>
   function checkStorage(){
     if(localStorage.getItem("activeUser")==null)
@@ -78,6 +99,49 @@
       }
 
     });
+
+
+
+    $(".hi").mousedown(function(){
+            $(".hi").removeClass("fa-eye").addClass("fa-eye-slash");
+            $("#currentPassword").prop("type","text");
+
+    });
+
+    $(".hi").mouseup(function(){
+        $(".hi").removeClass("fa-eye-slash").addClass("fa-eye");
+            $("#currentPassword").prop("type","password");
+           
+
+    });
+
+
+
+    $(".hii").mousedown(function(){
+            $(".hii").removeClass("fa-eye").addClass("fa-eye-slash");
+            $("#newPassword").prop("type","text");
+
+    });
+
+    $(".hii").mouseup(function(){
+        $(".hii").removeClass("fa-eye-slash").addClass("fa-eye");
+            $("#newPassword").prop("type","password");
+           
+
+    });
+
+    $(".hiy").mousedown(function(){
+            $(".hiy").removeClass("fa-eye").addClass("fa-eye-slash");
+            $("#confirmPassword").prop("type","text");
+
+    });
+
+    $(".hiy").mouseup(function(){
+        $(".hiy").removeClass("fa-eye-slash").addClass("fa-eye");
+            $("#confirmPassword").prop("type","password");
+           
+
+    });
   });
 </script>
 
@@ -129,15 +193,24 @@
                 <form>
                   <div class="mb-3">
                     <label for="currentPassword" class="form-label">Current Password</label>
+                    <div class="input-container">
                     <input type="password" class="form-control" id="currentPassword">
+                    <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hi"></i>
+                  </div>
                   </div>
                   <div class="mb-3">
                     <label for="newPassword" class="form-label">New Password</label>
+                    <div class="input-container">
                     <input type="password" class="form-control" id="newPassword">
+                    <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hii"></i>
+                  </div>
                   </div>
                   <div class="mb-3">
                     <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <div class="input-container">
                     <input type="password" class="form-control" id="confirmPassword">
+                    <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hiy"></i>
+                  </div>
                   </div>
                 
                   <button type="button" class="btn btn-primary" id="btnChangePwd">Save Changes</button>

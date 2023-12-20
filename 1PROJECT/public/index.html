@@ -172,7 +172,7 @@
 
         
     //email validation
-    $("#Email1").blur(function(){
+    $("#Email1").on('input',function(){
         var r=/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
         var email=$("#Email1").val();
         if(r.test(email)==true)
@@ -186,7 +186,7 @@
     });
 
       //password validation
-      $("#Password1").blur(function(){
+      $("#Password1").on('input',function(){
         var r=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
         var pass=$("#Password1").val();
         if(r.test(pass)==true)

@@ -23,60 +23,114 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script>
-      $(document).ready(function(){
-        displayUser();
-        function displayUser()
-      {
-        var activeUserss=localStorage.getItem("activeUser");
-        document.querySelector("#wuser").innerHTML="Welcome : "+activeUserss;
-        document.querySelector("#txtEmaili").value=activeUserss;
-        fetchSharks();
-
+    <style>
+      .star {
+        color: red;
       }
 
-         function fetchSharks(){
-                  var email=$("#txtEmaili").val();
-                  var obj={
-                    type:"get",
-                    url:"search-shark",
-                    data:{
-                      em:email
-                    }
-                  }
+      .blue-content {
+        color: blue;
+      }
 
-                  $.ajax(obj).done(function(jsonObj)
-                  {
+      .input-container {
+        position: relative;
+      }
 
-                    if(jsonObj.length==1)
-                    {
-                    $("#txtnamei").val(jsonObj[0].namee);
-                    $("#txtcontacti").val(jsonObj[0].contact);
-                    $("#txtCompanyi").val(jsonObj[0].company);
-                    $("#txtWebsitei").val(jsonObj[0].website);
-                    $("#netWorthi").val(jsonObj[0].worth);
-                    $("#fundedi").val(jsonObj[0].funded)
-                    $("#otherinfo").val(jsonObj[0].info);
+      .input-container input {
+        padding-right: 40px;
+      }
 
-                  
-                    $('#btnsave').prop('disabled', true);
-                    }
-                  } ).fail(function(err){
-                      console.log(err);
-                  })
+      .input-container #errMobile,
+      .input-container #errWorth
+       {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .input-container #errMobile,
+      .input-container #errWorth {
+        right: 15px;
+        z-index: 1;
+      }
+    </style>
+    <script>
+      $(document).ready(function () {
+        displayUser();
+        function displayUser() {
+          var activeUserss = localStorage.getItem("activeUser");
+          document.querySelector("#wuser").innerHTML =
+            "Welcome : " + activeUserss;
+          document.querySelector("#txtEmaili").value = activeUserss;
+          fetchSharks();
+        }
 
-                }
+        function fetchSharks() {
+          var email = $("#txtEmaili").val();
+          var obj = {
+            type: "get",
+            url: "search-shark",
+            data: {
+              em: email,
+            },
+          };
 
+          $.ajax(obj)
+            .done(function (jsonObj) {
+              if (jsonObj.length == 1) {
+                $("#txtnamei").val(jsonObj[0].namee);
+                $("#txtcontacti").val(jsonObj[0].contact);
+                $("#txtCompanyi").val(jsonObj[0].company);
+                $("#txtWebsitei").val(jsonObj[0].website);
+                $("#netWorthi").val(jsonObj[0].worth);
+                $("#fundedi").val(jsonObj[0].funded);
+                $("#otherinfo").val(jsonObj[0].info);
 
-   $("#btnupdate").click(
-    function(){
-       alert("helolo");
-       $('#btnupdate').prop('disabled', true);
-    }
-   );
+                $("#btnsave").prop("disabled", true);
+                $("#btnupdate").prop("disabled", false);
+              } else {
+                $("#btnsave").prop("disabled", false);
+                $("#btnupdate").prop("disabled", true);
+              }
+            })
+            .fail(function (err) {
+              console.log(err);
+            });
+        }
 
-  
-    });
+        //mobile validation
+        $("#txtcontacti").on("input", function () {
+          var r = /^\d{10}$/;
+          var mob = $("#txtcontacti").val();
+
+          const aa = $("#txtcontacti").val();
+          if (r.test(mob) == true) {
+            $("#errMobile").html("✅");
+          } else if (aa == "") {
+            $("#errMobile").html("");
+          } else {
+            $("#errMobile").html("❌");
+          }
+        });
+
+        $("#netWorthi").on("input", function () {
+          var numericValue = $(this).val().replace(/\D/g, ""); // Remove non-digit characters
+
+          // Update the input field value to contain only digits
+          $(this).val(numericValue);
+
+          // Check if the value is not empty (optional)
+          if (numericValue === "") {
+            $("#errWorth").html(""); // Clear error message if field is empty
+          } else {
+            $("#errWorth").html("✅"); // Indicate that only numbers are allowed
+          }
+        });
+
+        $("#txtWebsitei").on("dblclick", function () {
+          var link = $(this).val();
+          window.open(link, "_blank");
+        });
+      });
     </script>
     <script></script>
   </head>
@@ -98,14 +152,6 @@
             >
               <span class="navbar-toggler-icon"></span>
             </button>
-
-            <!-- <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                      <li class="nav-item">
-                        <button class="btn btn-primary">LOGOUT</button>
-                      </li>
-                    </ul>
-                  </div> -->
           </div>
         </nav>
       </div>
@@ -118,75 +164,93 @@
         </div>
 
         <div class="col-md-12">
-          <label for="txtEmaili" class="form-label">Email</label>
+          <label for="txtEmaili" class="form-label"
+            >Email <span class="star">*</span></label
+          >
           <input
             type="email"
             id="txtEmaili"
             class="form-control"
             name="txtEmail"
+            readonly
+            required
           />
         </div>
 
-        <!-- <div class="col-md-6">
-          <button type="button" class="btn btn-primary mt-4" id="search">
-            Search
-          </button>
-        </div> -->
-
         <div class="col-md-6">
-          <label for="txtnamei" class="form-label">Name</label>
+          <label for="txtnamei" class="form-label"
+            >Name <span class="star">*</span></label
+          >
           <input
             type="text"
             id="txtnamei"
             class="form-control"
             name="txtname"
+            required
           />
         </div>
 
         <div class="col-md-6">
-          <label for="txtcontacti" class="form-label">Contact No.</label>
-          <input
-            type="text"
-            id="txtcontacti"
-            class="form-control"
-            name="txtcontact"
-          />
+          <label for="txtcontacti" class="form-label"
+            >Contact No. <span class="star">*</span></label
+          >
+          <div class="input-container">
+            <input
+              type="text"
+              id="txtcontacti"
+              class="form-control"
+              name="txtcontact"
+              required
+            />
+            <span id="errMobile"></span>
+          </div>
         </div>
 
         <div class="col-12">
-          <label for="txtCompanyi" class="form-label">Name of txtCompany</label>
+          <label for="txtCompanyi" class="form-label"
+            >Name Of Your Company <span class="star">*</span></label
+          >
           <input
             type="text"
             id="txtCompanyi"
             class="form-control"
             name="txtCompany"
+            required
           />
         </div>
 
         <div class="col-12">
           <label for="txtWebsitei" class="form-label"
-            >Company Website Link:</label
+            >Company Website Link <span class="star">*</span></label
           >
           <input
             type="text"
             id="txtWebsitei"
-            class="form-control"
+            class="form-control blue-content"
             name="txtWebsite"
+            required
           />
         </div>
 
         <div class="col-12">
-          <label for="netWorthi" class="form-label">Net Worth of Company</label>
-          <input
-            type="text"
-            id="netWorthi"
-            class="form-control"
-            name="netWorth"
-          />
+          <label for="netWorthi" class="form-label"
+            >Net Worth of Your Company <span class="star">*</span></label
+          >
+          <div class="input-container">
+            <input
+              type="text"
+              id="netWorthi"
+              class="form-control"
+              name="netWorth"
+              required
+            />
+            <span id="errWorth"></span>
+          </div>
         </div>
         <div class="col-12">
           <label for="fundedi" class="form-label"
-            >Already Funded How Many companies:</label
+            >Already Funded How Many Companies
+            <span class="star">*</span></label
           >
           <input
             type="number"
@@ -195,6 +259,7 @@
             name="funded"
             max="100"
             min="0"
+            required
           />
         </div>
 
