@@ -26,7 +26,43 @@
       .input-container {
   position: relative;
 }
+.userEmail{
+     padding-left: 30px;
+     font-size:20px;
+     padding-top:7px;
+}
+.nvbar{
+  background-color:#193384;
+  color:#ffffff;
+  height: 60px;
+  padding-top:20px;
+}
 
+.logo{
+  font-size:20px;
+  padding-top:7px;
+  color:#ffffff !important;
+  
+
+}
+
+.s-logo{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+
+}
+.form-label {
+  font-size: 18px; 
+  font-weight:600;
+}
+.yp{
+  font-size:28px;
+  margin-bottom: 0;
+  margin-top: 3px;
+  color:#193384;
+  font-weight: 700;
+}
 .input-container input {
   padding-right: 40px; /* Increased space for icon and span */
 }
@@ -38,6 +74,11 @@
   top: 50%;
   transform: translateY(-50%);
 }
+#btnpost {
+    background-color: #193384;
+    border-color: #193384;
+    color: white;
+  }
 
 
 
@@ -122,43 +163,29 @@ $(document).ready(function() {
   <body onload="displayUser();">
     <div class="container">
       <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-success border">
+        <nav class="navbar navbar-expand-lg navbar-light nvbar">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Shark Tank</a>
-            <h2 id="wuser"></h2>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
+            
+            <p class="logo"><img src="images/Shark_logo.jpeg" class="s-logo">&nbsp;Shark Tank India</p>
+            <p id="wuser" class="userEmail"></p>
 
-            <!-- <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  <button class="btn btn-primary">LOGOUT</button>
-                </li>
-              </ul>
-            </div> -->
+         
+
+          
           </div>
         </nav>
       </div>
       
-
-
-      
-      <div class="row  d-flex align-items-center justify-content-center">
-      
-          <h3>POST YOUR IDEA</h3>
-      
+      <div class="row">
+        <div class="col-5 offset-5">
+          <p class="yp">Post Your Idea</p>
+        </div>
       </div>
+
+      
+    
       <div>
-        <form class="row g-3"  method="post">
+        <form class="row px-5 g-3"  method="post">
           <div class="col-md-12">
             <label for="txtEmail" class="form-label">Email <span class="star"> *</span></label>
             <input type="email" class="form-control" id="txtEmail" readonly name="Nemail" required/>
@@ -185,7 +212,7 @@ $(document).ready(function() {
 
           
           <div class="col-6">
-            <label for="fundmin" class="form-label">Enter Minimum Funding You Need (in Rs.) <span class="star"> *</span></label>
+            <label for="fundmin" class="form-label">Enter Minimum Funding You Need (in lakhs) <span class="star"> *</span></label>
             <div class="input-container">
             <input
               type="text"
@@ -198,7 +225,7 @@ $(document).ready(function() {
           </div>
           </div>
           <div class="col-6">
-            <label for="fundmax" class="form-label">Enter Maximum Funding You Need (in Rs.) <span class="star"> *</span></label>
+            <label for="fundmax" class="form-label">Enter Maximum Funding You Need (in lakhs) <span class="star"> *</span></label>
             <div class="input-container">
             <input
               type="text"
@@ -219,7 +246,7 @@ $(document).ready(function() {
           
         
           <div class="col-12 d-flex align-items-center justify-content-center">
-            <button type="submit" class="btn btn-primary " id="btnpost" formaction="/post-idea">POST IDEA</button>
+            <button type="submit" class="btn btn-primary " id="btnpost" formaction="/post-idea">Post Idea</button>
           </div>
         </form>
       </div>

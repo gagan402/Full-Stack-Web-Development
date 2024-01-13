@@ -29,11 +29,67 @@
   .star{
     color:red;
   }
+  .imgg{
+    width:90%;
+    height:90%;
+    border-radius:20px;
+    border:3px solid #193384;
+  }
+
 
   .input-container {
   position: relative;
 }
+.userEmail{
+     padding-left: 30px;
+     font-size:20px;
+     padding-top:7px;
+}
+.nvbar{
+  background-color:#193384;
+  color:#ffffff;
+  height: 60px;
+  padding-top:20px;
+}
 
+.logo{
+  font-size:20px;
+  padding-top:7px;
+  color:#ffffff !important;
+  
+
+}
+
+.s-logo{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+
+}
+
+#btnsave {
+    background-color: #193384;
+    border-color: #193384;
+    color: white;
+  }
+
+  #btnupdate {
+    background-color:#193384;
+    border-color: #193384;
+    color: white;
+  }
+.form-label {
+  font-size: 18px; 
+  font-weight:600;
+}
+
+.yp{
+  font-size:28px;
+  margin-bottom: 0;
+  margin-top: 3px;
+  color:#193384;
+  font-weight: 700;
+}
 .input-container input {
   padding-right: 40px; /* Increased space for icon and span */
 }
@@ -48,6 +104,8 @@
   right: 20px; /* Adjust this value for desired icon spacing */
   z-index: 1;
 }
+
+
 
  </style>
     <script>
@@ -160,30 +218,22 @@
   <body >
     <div class="container border">
       <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-success border">
+        <nav class="navbar navbar-expand-lg navbar-light nvbar">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Shark Tank</a>
-            <h2 id="wuser"></h2>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
             
-           
+            <p class="logo"><img src="images/Shark_logo.jpeg" class="s-logo">&nbsp;Shark Tank India</p>
+            <p id="wuser" class="userEmail"></p>
+
+         
+
+          
           </div>
         </nav>
       </div>
 
       <div class="row">
         <div class="col-5 offset-5">
-          <h3>Your-Profile</h3>
+          <p class="yp">Your Profile</p>
         </div>
       </div>
 
@@ -317,10 +367,10 @@
             onchange="doPrev(this,prev);"
           />
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 gg">
           <img
             src=""
-            style="width: 90%; height: 90%; border: 2px solid red"
+            class="imgg"
             id="prev"
           />
         </div>
@@ -349,7 +399,7 @@
           />
         </div>
 
-        <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="col-12 d-flex align-items-center  justify-content-center mb-3">
           <input
             type="submit"
             value="Save"
