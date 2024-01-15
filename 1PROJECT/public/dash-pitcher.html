@@ -21,8 +21,10 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-   
     
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&display=swap');
+    </style>
 <style>
  .card-body a.btn-primary {
         background-color: #193384;
@@ -37,10 +39,11 @@
 .nvbar{
   background-color:#193384;
   color:#ffffff;
-  height: 60px;
+  /* height: 60px; */
 }
 .logo{
-  font-size:20px;
+  font-size:22px;
+  font-weight: 700;
   padding-top:7px;
   color:#ffffff !important;
 
@@ -68,17 +71,22 @@
 }
 
 .s-logo{
-  width:40px;
-  height:40px;
+  width:50px;
+  height:50px;
   border-radius:50%;
-
+  background-color: #ffffff;
+  padding-top: 3px;
+  
 }
 
 
 .card{
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
+.vad{
+  font-size:13px;
+}
 
 
   .input-container {
@@ -100,15 +108,38 @@
   right: 7px; /* Adjust this value for desired span spacing */
 }
 
+#btnChangePwd {
+    background-color: #193384;
+    border-color: #193384;
+    color: white;
+  }
+
+  #changePasswordModalLabel{
+    color: #193384;
+    font-weight: 700;
+  }
 
 
 /* Define styles for the Shark Tank India text */
 .shark-tank-text {
-  font-size:50px;
-  color: black;
+  font-size:35px;
+  font-weight: 700;
+  color:#193384 !important;
   opacity: 0; /* Initially set opacity to 0 */
   transform: translateY(-20px); /* Move text slightly up initially */
   animation: fadeInAndMove 2s forwards;
+  /* font-family: 'Bungee Spice', sans-serif; */
+  text-align: center; 
+  margin: 0 auto;
+}
+
+
+#pwdCheck {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 35px; /* Adjust this value to set the desired distance from the eye icon */
+  color: #193384; /* Color of the tick/cross emoji */
 }
 
 @keyframes fadeInAndMove {
@@ -229,16 +260,16 @@
 
 
      //password validation
-     $("#Password1").on('input',function(){
-        var r=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-        var pass=$("#Password1").val();
-        if(r.test(pass)==true)
-        {
-            $("#pwdCheck").html("✅");
-        }
-        else{
-            $("#pwdCheck").html("❌");
-        }
+     $("#newPassword").on('input', function () {
+      var r = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+      var pass = $("#newPassword").val();
+      if (r.test(pass) === true) {
+        $("#pwdCheck").html("✅");
+        $("#btnChangePwd").prop("disabled", false);
+      } else {
+        $("#pwdCheck").html("❌");
+        $("#btnChangePwd").prop("disabled", true);
+      }
     });
 
   });
@@ -253,7 +284,7 @@
         <nav class="navbar navbar-expand-lg navbar-light nvbar">
           <div class="container-fluid">
 
-            <img src="images/Shark_logo.jpeg" class="s-logo">
+            <img src="images/logo.png" class="s-logo">
             <p class="logo">&nbsp;Shark Tank India</p>
             <p id="wuser" class="userEmail"></p>
 
@@ -287,21 +318,25 @@
                   <div class="mb-3">
                     <label for="currentPassword" class="form-label">Current Password</label>
                     <div class="input-container">
-                    <input type="password" class="form-control" id="currentPassword">
+                    <input type="password" class="form-control" required id="currentPassword">
                     <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hi"></i>
                   </div>
                   </div>
                   <div class="mb-3">
                     <label for="newPassword" class="form-label">New Password</label>
                     <div class="input-container">
-                    <input type="password" class="form-control" id="newPassword">
+                    <input type="password" required class="form-control" id="newPassword">
+                    <span id="pwdCheck"></span>
                     <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hii"></i>
                   </div>
+                    <p class="vad">Your Password must be of 6 to 20 characters which contain at least one numeric digit,  one uppercase and one lowercase letter.</p>
+                  
+                  
                   </div>
                   <div class="mb-3">
-                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <label for="confirmPassword"  class="form-label">Confirm Password</label>
                     <div class="input-container">
-                    <input type="password" class="form-control" id="confirmPassword">
+                    <input type="password"  required class="form-control" id="confirmPassword">
                     <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hiy"></i>
                   </div>
                   </div>
@@ -371,11 +406,12 @@
 
 
 
-      <div class="row align-items-center justify-content-center">
+      <div class="row align-items-center justify-content-center mx-auto">
            
             <p class="shark-tank-text">
-              <img src="https://img.freepik.com/premium-vector/childrens-illustration-cute-shark-isolated-white-background-hand-drawn-blue-shark-cartoon-style-vector-illustration_490811-690.jpg?w=1060" width="380px " height="200px">
-              Shark Tank India
+               Shark Tank India
+              <img src="images/logo.png" width="200px " style="margin-left: -50px;"height="200px">
+              
             </p>
           
     </div>

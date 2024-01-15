@@ -17,111 +17,125 @@
     ></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+    <style>
+     .nvbar{
+  background-color:#193384;
+  color:#ffffff;
+  /* height: 60px; */
+  /* padding-top:20px; */
+}
+
+.logo{
+
+  font-size:22px;
+  font-weight: 700;
+  /* padding-top:7px; */
+  color:#ffffff !important;
+}
+
+.s-logo{
+ 
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background-color: #ffffff;
+  padding-top: 3px;
+  margin-bottom: -15px;
+  
+}
+    </style>
     <script>
-        var module=angular.module("mymodule",[]);
-           module.controller("myController",function($scope,$http){
-            
-            $scope.fetchRecords=function(){
-                            var url="/fetch-users";
-                            $http.get(url).then(done,fail);
-                            function done(res){
-                                $scope.jsonArray=res.data;
-                            }
+      var module = angular.module("mymodule", []);
+      module.controller("myController", function ($scope, $http) {
+        $scope.fetchRecords = function () {
+          var url = "/fetch-users";
+          $http.get(url).then(done, fail);
+          function done(res) {
+            $scope.jsonArray = res.data;
+          }
 
-                            function fail(err){
-                                    alert(err.data);
-                            }
+          function fail(err) {
+            alert(err.data);
+          }
+        };
 
-                    }
+        $scope.blockUser = function (email) {
+          var url = "/block-user?em=" + email;
+          $http.get(url).then(done, fail);
+          function done(res) {
+            alert("User with " + email + " is blocked");
+            $scope.fetchRecords();
+          }
 
-            $scope.blockUser=function(email){
-                var url="/block-user?em="+email;
-                $http.get(url).then(done,fail);
-                            function done(res){
-                                alert("User with "+email+" is blocked");
-                                $scope.fetchRecords();
-                            }
+          function fail(err) {
+            alert(err.data);
+          }
+        };
 
-                            function fail(err){
-                                    alert(err.data);
-                            }
-            }
+        $scope.resumeUser = function (email) {
+          var url = "/resume-user?em=" + email;
+          $http.get(url).then(done, fail);
+          function done(res) {
+            alert("User with " + email + " is resumed");
+            $scope.fetchRecords();
+          }
 
-        
-
-           $scope.resumeUser=function(email){
-                var url="/resume-user?em="+email;
-                $http.get(url).then(done,fail);
-                            function done(res){
-                                alert("User with "+email+" is resumed");
-                                $scope.fetchRecords();
-                            }
-
-                            function fail(err){
-                                    alert(err.data);
-                            }
-            }
-        })
-        
+          function fail(err) {
+            alert(err.data);
+          }
+        };
+      });
     </script>
-
   </head>
-  <body ng-app="mymodule" ng-controller="myController" >
+  <body ng-app="mymodule" ng-controller="myController">
     <div class="container">
       <div class="row">
-        <nav class="navbar navbar-expand-lg navbar-light bg-success border">
+        <nav class="navbar navbar-expand-lg navbar-light nvbar">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Shark Tank</a>
-
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                  <button class="btn btn-primary">LOG OUT</button>
-                </li>
-              </ul>
-            </div> -->
+            <p class="logo">
+              <img src="images/logo.png" class="s-logo" />&nbsp;Shark Tank India
+            </p>
           </div>
         </nav>
       </div>
       <div class="row">
-        <div class="d-flex align-items-center justify-content-center ">
-          <input type="button" value="Fetch All Users" ng-click="fetchRecords()"/>
+        <div class="d-flex align-items-center justify-content-center">
+          <input
+            type="button"
+            value="Fetch All Users"
+            ng-click="fetchRecords()"
+          />
         </div>
       </div>
       <div class="row">
-        
-          <table class=" table border table-striped">
-            <tr>
-              <th>Sr No.</th>
-              <th>Email</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-            <tr  ng-repeat="obj in jsonArray">
-              <td>{{$index+1}}</td>
-              <td>{{obj.emailid}}</td>
-              <td>{{obj.utype}}</td>
-              <td>{{obj.statuss}}</td>
-              <td>
-                <input type="button" value="Block User" ng-click="blockUser(obj.emailid)" />
-                <input type="button" value="Resume"  ng-click="resumeUser(obj.emailid)"/>
-              </td>
-            </tr>
-          </table>
-        
+        <table class="table border table-striped">
+          <tr>
+            <th>Sr No.</th>
+            <th>Email</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          <tr ng-repeat="obj in jsonArray">
+            <td>{{$index+1}}</td>
+            <td>{{obj.emailid}}</td>
+            <td>{{obj.utype}}</td>
+            <td>{{obj.statuss}}</td>
+            <td>
+              <input
+                type="button"
+                value="Block User"
+                ng-click="blockUser(obj.emailid)"
+              />
+              <input
+                type="button"
+                value="Resume"
+                ng-click="resumeUser(obj.emailid)"
+              />
+            </td>
+          </tr>
+        </table>
       </div>
     </div>
   </body>

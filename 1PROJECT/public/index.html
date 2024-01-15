@@ -33,6 +33,14 @@
 
 
 
+.s-logo{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background-color: #ffffff;
+  padding-top: 3px;
+  
+}
 
 .input-container {
   position: relative;
@@ -62,7 +70,77 @@
   right: 7px; /* Adjust this value for desired span spacing */
 }
 
+.navbar {
+    background-color: #193384;
+    /* height: 60px; */
+    color:#ffffff;
+  }
 
+  /* .navbar-nav a {
+    color: #ffffff; 
+  } */
+  .clr{
+    background-color: #193384;
+  }
+
+  .hy {
+    background-color:#ffffff ; 
+    border-color: #ffffff;
+    color:#193384;
+    font-weight: 700;
+}
+
+.hy:hover {
+    background-color:#ffffff !important; 
+    border-color: #ffffff !important;
+    color:#193384;
+    font-weight: 700;
+}
+
+
+ .titles{
+  color:white;
+ }
+
+
+
+ /* Add this to your existing styles */
+
+/* Center the "Go To Top" button */
+.row.justify-content-center {
+  text-align: center;
+}
+
+.btn.go-to-top {
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+/* Style the "Go To Top" button */
+.btn.go-to-top {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #193384;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* Style on hover */
+.btn.go-to-top:hover {
+  background-color: #193384;
+}
+
+#saveDataBtn {
+    background-color: #193384;
+    border-color: #193384;
+    color: white;
+  }
+
+  #logging {
+    background-color:#193384;
+    border-color: #193384;
+    color: white;
+  }
 
     </style>
  
@@ -221,9 +299,10 @@
   <body>
     <div class="container">
       <div class="row top">
-        <nav class="navbar navbar-expand-lg navbar-light bg-success border">
+        <nav class="navbar navbar-expand-lg navbar-light ">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">Shark Tank</a>
+            <img src="images/logo.png" class="s-logo">
+            <h4>&nbsp;Shark Tank India</h4>
 
             <button
               class="navbar-toggler"
@@ -242,32 +321,31 @@
 
 
                 <li class="nav-item" >
-                  <a href="#service"  class="btn btn-primary ms-2" >Services</a>
+                  <a href="#service"  class="btn hy  ms-2" > Our Services</a>
                 </li>
 
-                <li class="nav-item">
-                  <a href="#"  class="btn btn-primary ms-2 " >Developers</a>
-                </li>
+  
 
                 <li class="nav-item">
-                  <a href="#reach"  class="btn btn-primary ms-2" >Reach Us</a>
+                  <a href="#reach"  class="btn hy  ms-2" >Reach Us</a>
                 </li>
                 <li class="nav-item">
                   <button
-                    class="btn btn-primary ms-2"
+                    class="btn hy  ms-2"
                     data-bs-toggle="modal"
                     data-bs-target="#modalsignup"
+                    
                   >
-                    SIGN UP
+                    Sign up
                   </button>
                 </li>
                 <li class="nav-item">
                   <button
-                    class="btn btn-primary ms-2"
+                    class="btn hy  ms-2"
                     data-bs-toggle="modal"
                     data-bs-target="#modallogin"
                   >
-                    LOGIN
+                    Login
                   </button>
                 </li>
 
@@ -289,18 +367,20 @@
         <div class="row mt-3">
           <div id="carouselExampleControls" class="carousel slide carousel-height" data-bs-ride="carousel">
             <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="950">
-                <img src="images/shark-tank-india.avif" class="d-block w-100 "    height="630" alt="...">
+              <div class="carousel-item" data-bs-interval="1000">
+                <img src="https://resize.indiatvnews.com/en/centered/newbucket/1200_675/2022/04/shark-tank-india-1651316680.jpg" class="d-block w-100"  height="630"  alt="...">
+              </div>
+              <div class="carousel-item active" data-bs-interval="1000">
+                <img src="https://cdn.finshots.app/images/2023/07/design-119-shark-tank.jpg" class="d-block w-100 "    height="630" alt="...">
               </div>
               <div class="carousel-item" data-bs-interval="1000">
-                <img src="images/shark-tank-india.avif" class="d-block w-100"  height="630"  alt="...">
+                <img src="https://static.tnn.in/thumb/msid-97043430,thumbsize-82874,width-1280,height-720,resizemode-75/97043430.jpg" class="d-block w-100"  height="630"  alt="...">
               </div>
               <div class="carousel-item" data-bs-interval="1000">
-                <img src="images/shark-tank-india.avif" class="d-block w-100"  height="630"  alt="...">
+                <img src="https://im.indiatimes.in/content/2023/Dec/From-Oyo-CEO-To-Zomato-CEO-Networths-Of-Shark-Tank-India-Season-3-Judges_6523fade445e9_658bb78f223c6.jpg" class="d-block w-100"  height="630"  alt="...">
               </div>
-              <div class="carousel-item" data-bs-interval="1000">
-                <img src="images/shark-tank-india.avif" class="d-block w-100"   height="630"  alt="...">
-              </div>
+              
+             
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -314,9 +394,9 @@
 
         </div>
 
-        <div class="row bg-success d-flex justify-content-center align-items-center   mt-3 mb-3"  id="service">
+        <div class="row clr d-flex justify-content-center align-items-center   mt-3 mb-3"  id="service">
           <div class="col text-center">
-          <h1>Our Services</h1>
+          <h3 class="titles">Our Services</h3>
         </div>
            
         </div>
@@ -324,39 +404,39 @@
         <div class="row justify-content-between">
 
           <div class="card" style="width: 18rem;">
-            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <img src="images/shark.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Sharks</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <!-- <h5 class="card-title">Sharks</h5> -->
+              <p class="card-text">Meet industry titans turned investors, the Sharks. Seasoned entrepreneurs and experts in various fields, they're ready to sink their teeth into the next big idea.</p>
               
             </div>
           </div>
 
 
           <div class="card" style="width: 18rem;">
-            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <img src="images/pitcher.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Pitchers</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <!-- <h5 class="card-title">Pitchers</h5> -->
+              <p class="card-text">Brave innovators step into the tank, armed with game-changing concepts. Watch as they navigate the pressure, hoping to secure a deal that will propel their dreams to new heights.</p>
             
             </div>
           </div>
 
 
           <div class="card" style="width: 18rem;">
-            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <img src="images/goal.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Goal</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <!-- <h5 class="card-title">Goal</h5> -->
+              <p class="card-text">Dive into the world of entrepreneurship with our Shark Tank platform. Discover groundbreaking ideas, witness intense pitches, and explore the journey of turning innovative visions into reality.</p>
             </div>
           </div>
 
 
           <div class="card" style="width: 18rem;">
-            <img src="images/shark-tank-india.avif" class="card-img-top" alt="...">
+            <img src="images/idea.jpeg" class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Showcase Ideas</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <!-- <h5 class="card-title">Showcase Ideas</h5> -->
+              <p class="card-text">Immerse yourself in a showcase of cutting-edge concepts and inventive pitches. From disruptive technologies to unique products, witness the evolution of ideas that could shape industries and capture the Sharks' attention.</p>
           
             </div>
           </div>
@@ -366,9 +446,9 @@
 
 
         
-        <div class="row bg-success d-flex justify-content-center align-items-center   mt-3 mb-3"  id="reach">
+        <div class="row  d-flex justify-content-center align-items-center clr  mt-3 mb-3"  id="reach">
           <div class="col text-center">
-            <h1>Reach Us</h1>
+            <h3 class="titles">Reach Us</h3>
             </div>
             
           
@@ -381,9 +461,9 @@
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3437.175135209825!2d76.65720287540971!3d30.516086474689622!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390fc32344a6e2d7%3A0x81b346dee91799ca!2sChitkara%20University!5e0!3m2!1sen!2sin!4v1701671768027!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-3">
           <div>
-          <a href="#top" class="btn btn-danger ">Go To Top</a>
+          <a href="#top" class="btn go-to-top">Go To Top</a>
         </div>
         </div>
         <!-- Modal signup-->
@@ -397,7 +477,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="modal1Label">SIGN UP</h5>
+                <h5 class="modal-title" class="modalHead" id="modal1Label">SIGN UP</h5>
                 <button
                   type="button"
                   class="btn-close"
@@ -471,7 +551,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="modal2Label">Login</h5>
+                <h5 class="modal-title"   id="modal2Label"> LOGIN</h5>
                 <button
                   type="button"
                   class="btn-close"

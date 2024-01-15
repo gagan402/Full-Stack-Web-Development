@@ -140,7 +140,7 @@ app.post("/save-data",function(req,res){
     var firm=req.body.txtfirm;
     var linked=req.body.linkedIn;
 
-    var filename="nopic.jpg";
+    var filename="npoic.png";
     if(req.files!=null)
     {
     filename=req.body.txtEmail+"-"+req.files.idprooffile.name;
@@ -196,7 +196,7 @@ app.post("/update-data",function(req,res){
     var firm=req.body.txtfirm;
     var linked=req.body.linkedIn;
 
-    var filename="nopic.jpg";
+    var filename="npoic.png";
     if(req.files!=null)
     {
     filename=req.body.txtEmail+"-"+req.files.idprooffile.name;

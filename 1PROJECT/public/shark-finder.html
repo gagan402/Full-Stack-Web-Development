@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>shark-finder</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -15,193 +15,211 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <style>
-      .userEmail{
-     padding-left: 30px;
-     font-size:20px;
-     padding-top:7px;
-}
-.nvbar{
-  background-color:#193384;
-  color:#ffffff;
-  height: 60px;
-  padding-top:20px;
-}
-
-.logo{
-  font-size:20px;
-  padding-top:7px;
-  color:#ffffff !important;
-  
-
-}
-.star{
-        color:red;
+      .userEmail {
+        padding-left: 30px;
+        font-size: 20px;
+        padding-top: 7px;
       }
 
-.s-logo{
-  width:40px;
-  height:40px;
-  border-radius:50%;
+      .nvbar {
+        background-color: #193384;
+        color: #ffffff;
+        /* height: 60px; */
+        /* padding-top:20px; */
+        /* padding-bottom: -300px; */
+      }
 
-}
-.form-label {
-  font-size: 18px; 
-  font-weight:600;
-}
-.yp{
-  font-size:28px;
-  margin-bottom: 0;
-  margin-top: 3px;
-  color:#193384;
-  font-weight: 700;
-}
+      .logo {
+        font-size: 22px;
+        font-weight: 700;
+        /* padding-top:7px; */
+        color: #ffffff !important;
+      }
 
+      .s-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        padding-top: 3px;
+        margin-bottom: -15px;
+      }
 
-.row-with-button {
+      .star {
+        color: red;
+      }
+
+      .form-label {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .yp {
+        font-size: 28px;
+        margin-bottom: 0;
+        margin-top: 3px;
+        color: #193384;
+        font-weight: 700;
+      }
+
+      .row-with-button {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 15px;
         margin-bottom: 15px;
-    }
+      }
 
-    .search-button {
-      width:200px;
-        background-color: #193384; /* Bootstrap primary color */
-        color: #fff; /* Text color */
-        padding: 10px 20px; /* Adjust padding as needed */
+      .search-button {
+        width: 200px;
+        background-color: #193384;
+        color: #fff;
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
-    }
+      }
+      .search-button:disabled {
+        background-color: #475ea3;
+      }
     </style>
     <script>
-        var module=angular.module("mymodule",[]);
-        module.controller("myController",function($scope,$http){
-           
-            
-                    $scope.sharksData=function(){
+      var module = angular.module("mymodule", []);
 
-                        const url="/get-shark-data?w="+$scope.worth+"&f="+$scope.fundN;
-                        $http.get(url).then(done,fail);
-                        function done(res){
-                            // alert(JSON.stringify(res.data));
-                            // console.log(JSON.stringify(res.data));
-                                $scope.SharkArray=res.data;
-                                if($scope.SharkArray.length==0)
-                                {
-                                  alert("No data avilable");
-                                }
-                        }
+      module.directive("numbersOnly", function () {
+        return {
+          require: "ngModel",
+          link: function (scope, element, attrs, modelCtrl) {
+            element.on("input", function () {
+              var numericValue = element.val().replace(/\D/g, "");
 
-                        function fail(err){
-                            alert(err.data);
-                        }
+              // Update the view value
+              modelCtrl.$setViewValue(numericValue);
+              modelCtrl.$render();
+            });
+          },
+        };
+      });
 
-                    }
-                    
+      module.controller("myController", function ($scope, $http) {
+        $scope.sharksData = function () {
+          const url =
+            "/get-shark-data?w=" + $scope.worth + "&f=" + $scope.fundN;
+          $http.get(url).then(done, fail);
+          function done(res) {
+            // alert(JSON.stringify(res.data));
+            // console.log(JSON.stringify(res.data));
+            $scope.SharkArray = res.data;
+            if ($scope.SharkArray.length == 0) {
+              alert("No data avilable");
+            }
+          }
 
-                   
-
-
-        })
+          function fail(err) {
+            alert(err.data);
+          }
+        };
+      });
     </script>
 
-<script>
-  function displayUser()
-  {
-    var activeUserss=localStorage.getItem("activeUser");
-    document.querySelector("#wuser").innerHTML="Welcome : "+activeUserss;
-
-  }
-</script>
-</head>
-<body onload="displayUser();"  ng-app="mymodule" ng-controller="myController" ng-init="fetchAllCategories();">
+    <script>
+      function displayUser() {
+        var activeUserss = localStorage.getItem("activeUser");
+        document.querySelector("#wuser").innerHTML =
+          "Welcome : " + activeUserss;
+      }
+    </script>
+  </head>
+  <body
+    ng-app="mymodule"
+    ng-controller="myController"
+    ng-init="fetchAllCategories();"
+    onload="displayUser();"
+  >
     <div class="container">
-        <div class="row">
-          <nav class="navbar navbar-expand-lg navbar-light nvbar">
-            <div class="container-fluid">
-              
-              <p class="logo"><img src="images/Shark_logo.jpeg" class="s-logo">&nbsp;Shark Tank India</p>
-              <p id="wuser" class="userEmail"></p>
-            
-            </div>
-          </nav>
+      <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light nvbar">
+          <div class="container-fluid">
+            <p class="logo">
+              <img src="images/Shark_logo.jpeg" class="s-logo" />&nbsp;Shark
+              Tank India
+            </p>
+            <p id="wuser" class="userEmail"></p>
+          </div>
+        </nav>
+      </div>
 
+      <div class="row">
+        <div class="col-5 offset-5">
+          <p class="yp">Find Sharks</p>
         </div>
+      </div>
 
+      <div class="row px-5">
+        <div class="col-md-6">
+          <label for="netWorth" class="form-label"
+            >Minimum Net Worth (in lakhs) <span class="star"> *</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="netWorth"
+            ng-model="worth"
+            numbers-only
+          />
+        </div>
+        <div class="col-md-6">
+          <label for="fundcompany" class="form-label"
+            >Minimum Number of Funded Companies
+            <span class="star"> *</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="fundcompany"
+            ng-model="fundN"
+            numbers-only
+          />
+        </div>
+      </div>
 
+      <div class="row mt-3 row-with-button">
+        <button
+          type="button"
+          class="search-button"
+          ng-click="worth && fundN && sharksData()"
+          ng-disabled="!(worth && fundN)"
+        >
+          SEARCH NOW
+        </button>
+      </div>
 
-
-
-        <div class="row">
-          <div class="col-5 offset-5">
-            <p class="yp">Find Sharks</p>
+      <div class="row mt-3">
+        <div class="col-md-3" ng-repeat="obj in SharkArray">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text"><b>Name : </b>{{obj.namee}}</p>
+              <p class="card-text"><b>Email : </b>{{obj.email}}</p>
+              <p class="card-text"><b>Company :</b> {{obj.company}}</p>
+              <p class="card-text">
+                <b>Website : </b
+                ><a href="{{obj.website}}" target="_blank">{{obj.website}}</a>
+              </p>
+              <p class="card-text"><b>Contact No. : </b>{{obj.contact}}</p>
+              <p class="card-text">
+                <b>Net Worth Of Company : </b>{{obj.worth}}
+              </p>
+              <p class="card-text">
+                <b>Already Funded Companies : </b>{{obj.funded}}
+              </p>
+              <p class="card-text"><b>Other Information : </b>{{obj.info}}</p>
+            </div>
           </div>
         </div>
-
-
-        <div class="row px-5">
-           
-            <div class="col-md-6">
-                <label for="netWorth" class="form-label" >Minimum Net Worth <span class="star"> *</span></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="netWorth"
-                   ng-model="worth"
-                
-                />
-
-            </div>
-            <div class="col-md-6">
-                <label for="fundcompany" class="form-label">Minimum Number of Funded Companies <span class="star"> *</span></label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fundcompany"
-                  ng-model="fundN"
-                />
-
-            </div>
-
-        </div>
-
-
-        <div class="row mt-3 row-with-button">
-            <input type="button" value="SEARCH NOW" class="search-button" ng-click="sharksData()">
-
-        </div>
-
-
-
-        <div class="row mt-3">
-            <div class="col-md-3" ng-repeat="obj in SharkArray">
-                <div class="card">
-                    <div class="card-body">
-                      <p class="card-text"><b>Name : </b>{{obj.namee}}</p>
-                      <p class="card-text" ><b>Email : </b>{{obj.email}}</p>
-                      <p class="card-text"><b>Company :</b> {{obj.company}}</p>
-                      <p class="card-text"><b>Website : </b><a href="{{obj.website}}" target="_blank">{{obj.website}}</a></p>
-                      <p class="card-text"><b>Contact No. : </b>{{obj.contact}}</p>
-                      <p class="card-text"><b>Net Worth Of Company : </b>{{obj.worth}}</p>
-                      <p class="card-text"><b>Already Funded Companies : </b>{{obj.funded}}</p>
-                      <p class="card-text"><b>Other Information : </b>{{obj.info}}</p>
-                    </div>
-                  </div>
-
-            </div>
-
-
-        </div>
-
+      </div>
     </div>
-
-
-    
-</body>
+  </body>
 </html>

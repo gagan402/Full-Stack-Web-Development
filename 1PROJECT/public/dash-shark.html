@@ -21,17 +21,42 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
-      .nvbar{
+
+#btnlogout {
+    background-color:#ffffff ; 
+    border-color: #ffffff;
+    color:#193384;
+    font-weight: 700;
+}
+
+#btnlogout:hover {
+    background-color:#ffffff; 
+    border-color: #ffffff;
+    color:#193384;
+    font-weight: 700;
+}
+.nvbar{
   background-color:#193384;
   color:#ffffff;
-  height: 60px;
+  /* height: 60px; */
 }
 .logo{
-  font-size:20px;
+  font-size:22px;
+  font-weight: 700;
   padding-top:7px;
   color:#ffffff !important;
 
 }
+
+.s-logo{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background-color: #ffffff;
+  padding-top: 3px;
+  
+}
+
 
 .userEmail{
      padding-left: 30px;
@@ -39,16 +64,16 @@
      padding-top:7px;
 }
 
-.s-logo{
-  width:40px;
-  height:40px;
-  border-radius:50%;
 
+.card{
+  margin-bottom: 40px;
 }
+
 
       .input-container {
       position: relative;
     }
+
     
     .input-container input {
       padding-right: 40px; /* Increased space for icon and span */
@@ -64,7 +89,59 @@
     {
       right: 7px; /* Adjust this value for desired span spacing */
     }
-    
+    .card-body a.btn-primary {
+        background-color: #193384;
+        border-color: #193384; 
+    }
+
+    .card-body a.btn-primary:hover {
+        background-color: #193384; 
+        border-color: #193384; 
+    }
+ 
+    #pwdCheck {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 35px; /* Adjust this value to set the desired distance from the eye icon */
+  color: #193384; /* Color of the tick/cross emoji */
+}
+.vad{
+  font-size:13px;
+}
+
+#btnChangePwd {
+    background-color: #193384;
+    border-color: #193384;
+    color: white;
+  }
+
+.shark-tank-text {
+  font-size:35px;
+  font-weight: 700;
+  color:#193384 !important;
+  opacity: 0; /* Initially set opacity to 0 */
+  transform: translateY(-20px); /* Move text slightly up initially */
+  animation: fadeInAndMove 2s forwards;
+  /* font-family: 'Bungee Spice', sans-serif; */
+  text-align: center; 
+  margin: 0 auto;
+}
+#changePasswordModalLabel{
+    color: #193384;
+    font-weight: 700;
+  }
+@keyframes fadeInAndMove {
+  /* Define keyframes for fading in and moving */
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
     </style>
 <script>
   function checkStorage(){
@@ -79,7 +156,7 @@
 
 
     var activeUserss=localStorage.getItem("activeUser");
-    $("#wuser").html("Welcome : "+activeUserss);
+    $("#wuser").html("<b>Welcome  </b> "+activeUserss);
     // alert(activeUserss);
 
     $('#changePasswordButton').click(function () {
@@ -167,6 +244,21 @@
            
 
     });
+
+
+
+        //password validation
+        $("#newPassword").on('input', function () {
+      var r = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+      var pass = $("#newPassword").val();
+      if (r.test(pass) === true) {
+        $("#pwdCheck").html("✅");
+        $("#btnChangePwd").prop("disabled", false);
+      } else {
+        $("#pwdCheck").html("❌");
+        $("#btnChangePwd").prop("disabled", true);
+      }
+    });
   });
 </script>
 
@@ -179,7 +271,7 @@
         <nav class="navbar navbar-expand-lg navbar-light nvbar">
           <div class="container-fluid">
 
-            <img src="images/Shark_logo.jpeg" class="s-logo">
+            <img src="images/logo.png" class="s-logo">
             <p class="logo">&nbsp;Shark Tank India</p>
             <p id="wuser" class="userEmail"></p>
 
@@ -196,7 +288,7 @@
         </nav>
       </div>
 
-      <div class="row  border border-danger justify-content-around">
+      <div class="row justify-content-center mt-5 mx-5 mb-2">
 
         <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -219,8 +311,12 @@
                     <label for="newPassword" class="form-label">New Password</label>
                     <div class="input-container">
                     <input type="password" class="form-control" id="newPassword">
+                    <span id="pwdCheck"></span>
+
                     <i  id="togglePassword" class="fa-solid fa-eye  fa-sm  hii"></i>
                   </div>
+                  <p class="vad">Your Password must be of 6 to 20 characters which contain at least one numeric digit,  one uppercase and one lowercase letter.</p>
+
                   </div>
                   <div class="mb-3">
                     <label for="confirmPassword" class="form-label">Confirm Password</label>
@@ -230,7 +326,7 @@
                   </div>
                   </div>
                 
-                  <button type="button" class="btn btn-primary" id="btnChangePwd">Save Changes</button>
+                  <button type="button" class="btn btn-primary" id="btnChangePwd" disabled>Save Changes</button>
                 </form>
               </div>
             </div>
@@ -241,10 +337,10 @@
 
         <!-- profile card -->
         <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="images/shark-tank-india.avif" class="card-img-top" alt="no pic">
+            <div class="card p-3" style="width: 18rem;">
+                <img src="images/pp.png" class="card-img-top" alt="no pic">
                 <div class="card-body d-flex justify-content-center align-items-center">
-                  <a href="shark-profile.html" target="_blank"class="btn btn-primary"> Shark Profile</a>
+                  <a href="shark-profile.html" target="_blank"class="btn btn-primary"> Your Profile</a>
                 </div>
               </div>
     
@@ -254,8 +350,8 @@
      
       <!-- find-pitchers -->
         <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="images/shark-tank-india.avif" class="card-img-top" alt="no pic">
+            <div class="card p-3" style="width: 18rem;">
+                <img src="images/pi.png" class="card-img-top" alt="no pic">
                 <div class="card-body d-flex justify-content-center align-items-center">
                   <a href="pitcher-finder.html" target="_blank" class="btn btn-primary">Find Pitchers</a>
                 </div>
@@ -266,8 +362,8 @@
         <!-- change password -->
 
          <div class="col ">
-            <div class="card" style="width: 18rem;">
-                <img src="images/shark-tank-india.avif" class="card-img-top" alt="no pic">
+            <div class="card p-3" style="width: 18rem;">
+                <img src="images/pws.png" class="card-img-top" alt="no pic">
                 <div class="card-body d-flex justify-content-center align-items-center">
                   <a href="#" class="btn btn-primary" id="changePasswordButton">Change Password</a>
                 </div>
@@ -281,6 +377,18 @@
        
 
       </div>
+
+
+      
+      <div class="row align-items-center justify-content-center">
+           
+        <p class="shark-tank-text">
+          Shark Tank India
+         <img src="images/logo.png" width="200px " style="margin-left: -50px;"height="200px">
+         
+       </p>
+      
+</div>
     </div>
 
 

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pitcher-finder</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -15,207 +15,286 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
-    
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <style>
+      .userEmail {
+        padding-left: 30px;
+        font-size: 20px;
+        padding-top: 7px;
+      }
+      
+      .star {
+        color: red;
+      }
+
+      .nvbar{
+  background-color:#193384;
+  color:#ffffff;
+  /* height: 60px; */
+  /* padding-top:20px; */
+}
+
+.logo{
+
+  font-size:22px;
+  font-weight: 700;
+  /* padding-top:7px; */
+  color:#ffffff !important;
+}
+
+.s-logo{
+ 
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  background-color: #ffffff;
+  padding-top: 3px;
+  margin-bottom: -15px;
+  
+}
+      .form-label {
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .yp {
+        font-size: 28px;
+        margin-bottom: 0;
+        margin-top: 3px;
+        color: #193384;
+        font-weight: 700;
+      }
+      .pp {
+        border-radius: 20px;
+      }
+      .row-with-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .search-button {
+        width: 200px;
+        background-color: #193384; /* Bootstrap primary color */
+        color: #fff; /* Text color */
+        padding: 10px 20px; /* Adjust padding as needed */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .search-button:disabled {
+        background-color: #475ea3;
+      }
+      #contactPitcher {
+        background-color: #193384;
+        border-color: #193384;
+        color: white;
+      }
+
+      #exampleModalLabel {
+        color: #193384;
+      }
+    </style>
     <script>
-        var module=angular.module("mymodule",[]);
-        module.controller("myController",function($scope,$http){
-            $scope.fetchAllCategories=function(){
-                var url="/fetch-all-categories";
-                            $http.get(url).then(done,fail);
-                            function done(res){
-                                $scope.CategoryArray=res.data;
-                            }
-                            function fail(err){
-                                    alert(err.data);
-                            }
-                    }
-            
-                    $scope.pitchersData=function(){
+      var module = angular.module("mymodule", []);
 
-                        var url="/get-pitcher-data?cat="+$scope.selCategory.category+"&fundmax="+$scope.MaxFund;
-                        $http.get(url).then(done,fail);
-                        function done(res){
-                            // alert(JSON.stringify(res.data));
-                            // console.log(JSON.stringify(res.data));
-                                $scope.PitcherArray=res.data;
-                                if($scope.PitcherArray.length==0)
-                                {
-                                  alert("No data avilable");
-                                }
-                        }
+      module.controller("myController", function ($scope, $http) {
+        $scope.fetchAllCategories = function () {
+          var url = "/fetch-all-categories";
+          $http.get(url).then(done, fail);
+          function done(res) {
+            $scope.CategoryArray = res.data;
+          }
+          function fail(err) {
+            alert(err.data);
+          }
+        };
 
-                        function fail(err){
-                            alert(err.data);
-                        }
+        $scope.pitchersData = function () {
+          var url =
+            "/get-pitcher-data?cat=" +
+            $scope.selCategory.category +
+            "&fundmax=" +
+            $scope.MaxFund;
+          $http.get(url).then(done, fail);
+          function done(res) {
+            // alert(JSON.stringify(res.data));
+            // console.log(JSON.stringify(res.data));
+            $scope.PitcherArray = res.data;
+            if ($scope.PitcherArray.length == 0) {
+              alert("No data avilable");
+            }
+          }
 
-                    }
-                    
+          function fail(err) {
+            alert(err.data);
+          }
+        };
 
-                    $scope.dataSelPitcher=function(em){
-                      var url="/selected-pitcher-data?eml="+em;
-                      $http.get(url).then(done,fail);
-                      function done(res){
-                        // alert(JSON.stringify(res.data));
-                        $scope.SelPitcher=res.data;
-
-                      }
-                      function fail(err){
-                        
-                        console.log(err.data);
-
-                      }
-
-                    }
-
-
-
-        })
+        $scope.dataSelPitcher = function (em) {
+          var url = "/selected-pitcher-data?eml=" + em;
+          $http.get(url).then(done, fail);
+          function done(res) {
+            // alert(JSON.stringify(res.data));
+            $scope.SelPitcher = res.data;
+          }
+          function fail(err) {
+            console.log(err.data);
+          }
+        };
+      });
     </script>
-     <script>
-      function displayUser()
-      {
-        var activeUserss=localStorage.getItem("activeUser");
-        document.querySelector("#wuser").innerHTML="Welcome : "+activeUserss;
-    
+    <script>
+      function displayUser() {
+        var activeUserss = localStorage.getItem("activeUser");
+        document.querySelector("#wuser").innerHTML =
+          "Welcome : " + activeUserss;
       }
     </script>
-</head>
-<body onload="displayUser();"  ng-app="mymodule" ng-controller="myController" ng-init="fetchAllCategories();">
+  </head>
+  <body
+    ng-app="mymodule"
+    ng-controller="myController"
+    ng-init="fetchAllCategories();"
+    onload="displayUser();"
+  >
     <div class="container">
-        <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-light bg-success border">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="#">Shark Tank</a>
-                  <h2 id="wuser"></h2>
-      
-                  <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
-                    aria-controls="navbarNav"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                  >
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-      
-                  <!-- <div class="collapse navba-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                      <li class="nav-item">
-                        <button class="btn btn-primary">LOG OUT</button>
-                      </li>
-                    </ul>
-                  </div> -->
-                </div>
-              </nav>
+      <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light nvbar">
+          <div class="container-fluid">
+            <p class="logo">
+              <img src="images/logo.png" class="s-logo" />&nbsp;Shark
+              Tank India
+            </p>
+            <p id="wuser" class="userEmail"></p>
+          </div>
+        </nav>
+      </div>
 
+      <div class="row">
+        <div class="col-5 offset-5">
+          <p class="yp">Find Pitchers</p>
+        </div>
+      </div>
+
+      <div class="row px-5">
+        <div class="col-md-6">
+          <label for="combocategory" class="form-label"
+            >Category <span class="star"> *</span></label
+          >
+          <select
+            id="combocategory"
+            class="form-select"
+            ng-model="selCategory"
+            ng-options="obj.category for obj in  CategoryArray "
+          >
+            <option disabled value="">Choose...</option>
+          </select>
         </div>
 
-
-
-
-        <div class="row">
-            <h3>PITCHER-FINDER</h3>
-
+        <div class="col-md-6">
+          <label for="fundmax" class="form-label"
+            >Maximum Funding Amount (in lakhs)
+            <span class="star"> *</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="fundmax"
+            ng-model="MaxFund"
+          />
         </div>
+      </div>
 
+      <div class="row mt-3 row-with-button">
+        <button
+          type="button"
+          class="search-button"
+          ng-click="selCategory.category && MaxFund && pitchersData()"
+          ng-disabled="!(selCategory.category && MaxFund)"
+        >
+          Search Pitchers
+        </button>
+      </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                <label for="combocategory" class="form-label">Category</label>
-                <select   id="combocategory" class="form-select"  ng-model="selCategory"  ng-options="obj.category for obj in  CategoryArray ">
-                  <option disabled value="">Choose...</option>
-                
-    
-                </select>
-
+      <div class="row mt-3">
+        <div class="col-md-3" ng-repeat="obj in PitcherArray">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text"><b>Category : </b>{{obj.category}}</p>
+              <p class="card-text"><b>Email : </b>{{obj.emailid}}</p>
+              <p class="card-text"><b>Idea : </b>{{obj.idea}}</p>
+              <p class="card-text"><b>Minimum Funding : </b>{{obj.fmin}}</p>
+              <p class="card-text"><b>Maximum Funding : </b>{{obj.fmax}}</p>
+              <p class="card-text"><b>Other Information : </b>{{obj.info}}</p>
+              <a
+                class="btn btn-primary"
+                id="contactPitcher"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal"
+                ng-click="dataSelPitcher(obj.emailid);"
+                >Contact Pitcher</a
+              >
             </div>
-            <!-- <div class="col-md-4">
-                <label for="fundmin" class="form-label" >Minimum Funding Amount</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fundmin"
-                   ng-model="MinFund"
-                
-                />
-
-            </div> -->
-            <div class="col-md-4">
-                <label for="fundmax" class="form-label">Maximum Funding Amount</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="fundmax"
-                  ng-model="MaxFund"
-                />
-
-            </div>
-
-        </div>
-
-
-        <div class="row mt-3">
-            <input type="button" value="SEARCH NOW"  ng-click="pitchersData()">
-
-        </div>
-
-
-
-        <div class="row mt-3">
-            <div class="col-md-3" ng-repeat="obj in PitcherArray">
-                <div class="card">
-                    <div class="card-body">
-                      <p class="card-text">Category:{{obj.category}}</p>
-                      <p class="card-text" >Email:{{obj.emailid}}</p>
-                      <p class="card-text">Idea:{{obj.idea}}</p>
-                      <p class="card-text">Minimum Funding:{{obj.fmin}}</p>
-                      <p class="card-text">Maximum Funding:{{obj.fmax}}</p>
-                      <p class="card-text">Other Information:{{obj.info}}</p>
-
-                      <a href="#" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#myModal" ng-click="dataSelPitcher(obj.emailid);">Contact Pitcher</a>
-                    </div>
-                  </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-
-<!-- modal -->
-
-    <div class="modal fade right" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  ng-repeat="obj in SelPitcher">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Pitcher Contact Details</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Email:{{obj.email}}</p>
-              <p>Name:{{obj.namee}}</p>
-              <p>Contact:{{obj.contact}}</p>
-              <p>Address:{{obj.address}}</p>
-              <p>City:{{obj.city}}</p>
-              <p>State:{{obj.state}}</p>
-              <p>ID-Proof:{{obj.idproof}}</p>
-              <p><img src="uploads/{{obj.proofpic}}" width="100" height="100"></p>
-              <p>Website Link:{{obj.firm}}</p>
-              <p>LinkedIn-Profile:{{obj.linkedin}}</p>
-
-            </div>
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
           </div>
         </div>
       </div>
-    
-</body>
+    </div>
+
+    <!-- modal -->
+
+    <div
+      class="modal fade right"
+      id="myModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      ng-repeat="obj in SelPitcher"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="exampleModalLabel">
+              Pitcher Contact Details
+            </h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p><b>Email : </b>{{obj.email}}</p>
+            <p><b>Name : </b>{{obj.namee}}</p>
+            <p><b>Contact : </b>{{obj.contact}}</p>
+            <p><b>Address : </b>{{obj.address}}</p>
+            <p><b>City : </b>{{obj.city}}</p>
+            <p><b>State : </b>{{obj.state}}</p>
+            <p><b>ID-Proof : </b>{{obj.idproof}}</p>
+            <p>
+              <img
+                src="uploads/{{obj.proofpic}}"
+                width="200"
+                height="130"
+                class="pp"
+              />
+            </p>
+
+            <p>
+              <b>Website Link : </b>
+              <a href="{{obj.firm}}" target="_blank">{{obj.firm}}</a>
+            </p>
+            <p>
+              <b>LinkedIn-Profile : </b>
+              <a href="{{obj.linkedin}}" target="_blank">{{obj.linkedin}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
